@@ -1,0 +1,1353 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manga Push DEMO</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/data.js"></script>
+    <style>
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Open Sans'), local('OpenSans'), url(font/opensans.woff) format('woff');
+        }
+        
+        html {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 2.3vh;
+        }
+        
+        body {
+            margin: 0;
+            background: #222;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        a {
+            color: #222;
+        }
+        
+        #area {
+            width: 75vh;
+            height: auto;
+            position: relative;
+            margin: 0 auto;
+            opacity: 0;
+            -webkit-transition: opacity 2s;
+            box-shadow: 0 0 10vh #BBB;
+        }
+        
+        #loading {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: #EEE;
+            position: relative;
+        }
+        
+        #loading_image {
+            width: 100%;
+            height: 100%;
+        }
+        
+        #loading_bar {
+            width: 70%;
+            height: 3.6vh;
+            margin: 0 auto;
+            margin-top: -16vh;
+            border: solid #FFF .2vh;
+            border-radius: 1.8vh;
+            display: none;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #loading_thumb {
+            width: 0%;
+            height: 100%;
+            border-radius: 0 1.8vh 1.8vh 0;
+            -webkit-transition: width 2s;
+            background: #FFF;
+        }
+        
+        #main {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: #EEE;
+            -webkit-transition: -webkit-filter .3s;
+            display: none;
+        }
+        
+        #head_bar {
+            width: 100%;
+            height: 4vh;
+            background: #222;
+        }
+        
+        #head_icon {
+            height: 4vh;
+            margin-left: .5vh;
+            position: absolute;
+            opacity: 0;
+            -webkit-animation: spinning 1.6s infinite steps(8);
+        }
+        
+        #head_title {
+            width: 30vh;
+            font-size: 2vh;
+            line-height: 4vh;
+            letter-spacing: .2vh;
+            margin-left: 5vh;
+            display: inline-block;
+            color: #EEE;
+        }
+        
+        #head_wifi {
+            font-size: 1.5vh;
+            line-height: 4vh;
+            letter-spacing: 0.2vh;
+            margin-left: 11vh;
+            display: inline-block;
+            color: #EEE;
+        }
+        
+        #head_wifiicon {
+            height: 4vh;
+            margin-left: 0vh;
+            position: absolute;
+        }
+        
+        #head_battery {
+            height: 4vh;
+            margin-left: 6vh;
+            position: absolute;
+        }
+        
+        #head_time {
+            font-size: 2vh;
+            line-height: 4vh;
+            letter-spacing: .1vh;
+            margin-left: 14vh;
+            display: inline-block;
+            color: #EEE;
+        }
+        
+        #head_noti {
+            font-size: 2vh;
+            line-height: 3.4vh;
+            letter-spacing: .2vh;
+            margin: .3vh 0vh;
+            position: absolute;
+            left: 5vh;
+            top: 0;
+            width: 25vh;
+            background: #EEE;
+            height: 3.4vh;
+            color: #222;
+            text-align: center;
+            border-radius: 1.5vh;
+            display: none;
+        }
+        
+        #button_bar {
+            width: 100%;
+            height: 10vh;
+            position: relative;
+            border-bottom: #222 solid .5vh;
+        }
+        
+        #button_home {
+            margin-left: 3vh;
+        }
+        
+        #search_box {
+            width: 19vh;
+            height: 4vh;
+            top: 2.5vh;
+            margin-left: 43vh;
+            padding: .5vh;
+            position: absolute;
+            border: solid .2vh #222;
+            border-radius: 1.5vh;
+        }
+        
+        #search_box img {
+            margin: .5vh;
+            height: 80%;
+        }
+        
+        #search_text {
+            position: absolute;
+            top: 1vh;
+            left: 5vh;
+            font-size: 2.5vh;
+            line-height: 3vh;
+        }
+        
+        #button_setting {
+            margin-left: 23vh;
+        }
+        
+        .mainbutton {
+            width: 9vh;
+            height: 9vh;
+            margin-top: .5vh;
+            background: #EEE;
+            display: inline-block;
+        }
+        
+        .mainbutton img {
+            width: 100%;
+        }
+        
+        #list {
+            width: 100%;
+            height: 100%;
+            letter-spacing: 0.2vh;
+        }
+        
+        #list_bar {
+            width: 100%;
+            height: 7vh;
+            position: relative;
+            border-bottom: #222 solid .2vh;
+        }
+        
+        #list_text {
+            margin-left: 5vh;
+            font-size: 2.5vh;
+            line-height: 5vh;
+        }
+        
+        .card {
+            width: 100%;
+            height: 15vh;
+            background: #EEE;
+        }
+        
+        .card_id {
+            display: inline-block;
+            float: left;
+            margin-left: 5vh;
+            margin-top: .5vh;
+            width: 3vh;
+            font-size: 2vh;
+            font-weight: bold;
+        }
+        
+        .card_cover {
+            width: 10vh;
+            height: 14vh;
+            margin-top: .5vh;
+            -webkit-filter: grayscale(100%);
+            float: left;
+        }
+        
+        .card_info {
+            width: 65%;
+            margin-top: 1.5vh;
+            margin-right: 5vh;
+            float: right;
+        }
+        
+        .card_title {
+            font-size: 2.8vh;
+            font-weight: bold;
+            line-height: 120%;
+        }
+        
+        .card_author {
+            font-size: 2.5vh;
+            line-height: 120%;
+        }
+        
+        .card_rates {
+            font-size: 2vh;
+            line-height: 200%;
+        }
+        
+        .sepline {
+            border-bottom: solid #AAA 0.2vh;
+            margin-left: 8vh;
+            margin-right: 5vh;
+        }
+        
+        #detail {
+            width: 100%;
+            height: 100%;
+            letter-spacing: 0.2vh;
+            background: none;
+            display: none;
+        }
+        
+        #detail_cover {
+            width: 20vh;
+            height: 28vh;
+            margin: 2vh;
+            -webkit-filter: grayscale(100%);
+            float: left;
+        }
+        
+        #detail_info {
+            width: 60%;
+            height: 28vh;
+            margin-top: 2vh;
+            margin-bottom: 2vh;
+            margin-right: 5vh;
+            float: right;
+        }
+        
+        #detail_title {
+            font-size: 2.8vh;
+            font-weight: bold;
+            line-height: 150%;
+        }
+        
+        #detail_author {
+            font-size: 2.5vh;
+            line-height: 200%;
+        }
+        
+        #detail_rates {
+            font-size: 2vh;
+            line-height: 200%;
+        }
+        
+        #detail_epi {
+            font-size: 2vh;
+            font-weight: bold;
+            line-height: 200%;
+        }
+        
+        #detail_from {
+            font-size: 2vh;
+            line-height: 200%;
+        }
+        
+        #detail_des {
+            margin: 0 2vh;
+            line-height: 150%;
+            text-align: justify;
+        }
+        
+        .detail_button {
+            display: inline-block;
+            width: auto;
+            height: 3vh;
+            margin: 1vh auto;
+            padding: 1vh 3vh;
+            font-size: 2vh;
+            line-height: 150%;
+            font-weight: bold;
+            background: #EEE;
+            border: solid #222 .2vh;
+            border-bottom: solid #222 .4vh;
+            border-radius: .8vh;
+        }
+        
+        .detail_sepline {
+            border-bottom: solid #222 0.2vh;
+            margin: 1vh 2vh;
+        }
+        
+        #detail_list {
+            margin-left: 2vh;
+        }
+        
+        #detail_listtitle {
+            font-size: 2.5vh;
+            line-height: 150%;
+            margin-bottom: 2vh;
+        }
+        
+        #detail_listitem04 a {
+            font-size: 2vh;
+        }
+        
+        #shop_page {
+            width: 100%;
+            height: 100%;
+            display: none;
+            overflow: hidden;
+            -webkit-transition: -webkit-filter .3s;
+            position: relative;
+        }
+        
+        #shop_iframe {
+            width: 100%;
+            height: 500%;
+            -webkit-filter: grayscale(100%);
+            border: none;
+        }
+        
+        #cover_panel {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        
+        #bright_panel {
+            position: absolute;
+            left: 20vh;
+            top: 14vh;
+            width: 45vh;
+            height: 62vh;
+            background: #EEE;
+            letter-spacing: 0.2vh;
+            border: solid #222 .4vh;
+            border-left-width: .2vh;
+            border-top: none;
+            overflow: hidden;
+            display: none;
+        }
+        
+        #bpanel_topline {
+            position: absolute;
+            width: 100%;
+            border-top: solid #222 .3vh;
+        }
+        
+        #bpanel_arrow {
+            position: absolute;
+            width: 3vh;
+            height: 3vh;
+            left: 5vh;
+            top: -1.8vh;
+            background: #EEE;
+            border-right: solid #222 .2vh;
+            border-bottom: solid #222 .4vh;
+            -webkit-transform: rotate(45deg);
+        }
+        
+        #upper_symbol {
+            position: absolute;
+            top: 3vh;
+            left: 4vh;
+            height: 5vh;
+            width: 5vh;
+            text-align: center;
+            line-height: 5vh;
+            font-size: 5vh;
+            font-weight: bold;
+            background: #EEE;
+        }
+        
+        #lower_symbol {
+            position: absolute;
+            top: 55vh;
+            left: 4vh;
+            height: 5vh;
+            width: 5vh;
+            text-align: center;
+            line-height: 1vh;
+            font-size: 5vh;
+            font-weight: bold;
+            background: #EEE;
+        }
+        
+        #level_blocks {
+            position: absolute;
+            top: 9vh;
+            left: 3.3vh;
+            font-size: 5vh;
+            z-index: 10;
+        }
+        
+        .block {
+            width: 5.2vh;
+            height: 1.4vh;
+            border: solid #222 .4vh;
+            margin: .5vh;
+            cursor: pointer;
+            box-sizing: border-box;
+            -webkit-transition: background .3s;
+        }
+        
+        .block_in {
+            background: #222;
+        }
+        
+        .block:last-child {
+            opacity: 0;
+        }
+        
+        #upper_text {
+            position: absolute;
+            top: 9vh;
+            left: 12vh;
+            width: 30vh;
+            font-size: 2.3vh;
+            font-weight: bold;
+        }
+        
+        #lower_text {
+            position: absolute;
+            top: 48vh;
+            left: 12vh;
+            width: 30vh;
+            font-size: 2.3vh;
+            font-weight: bold;
+        }
+        
+        #setting_panel {
+            position: absolute;
+            left: 40vh;
+            top: 14vh;
+            width: 34vh;
+            background: #EEE;
+            letter-spacing: 0.2vh;
+            border: solid #222 .4vh;
+            border-left-width: .2vh;
+            border-top: none;
+            overflow: hidden;
+            display: none;
+        }
+        
+        #spanel_topline {
+            position: absolute;
+            width: 100%;
+            border-top: solid #222 .3vh;
+        }
+        
+        #spanel_arrow {
+            position: absolute;
+            width: 3vh;
+            height: 3vh;
+            left: 27vh;
+            top: -1.8vh;
+            background: #EEE;
+            border-right: solid #222 .2vh;
+            border-bottom: solid #222 .4vh;
+            -webkit-transform: rotate(45deg);
+        }
+        
+        #spanel_list {
+            margin: 5vh 3vh 3vh 3vh;
+        }
+        
+        .spanel_item {
+            padding: 1.5vh 1vh;
+            margin: .5vh 0;
+            font-size: 3vh;
+            background: #EEE;
+        }
+        
+        #spanel_list a {
+            text-decoration: none;
+        }
+        
+        .spanel_sepline {
+            width: 100%;
+            border-bottom: solid #222 0.2vh;
+        }
+        
+        #float_panel {
+            position: absolute;
+            width: 58vh;
+            top: 25vh;
+            left: 8vh;
+            background: #EEE;
+            letter-spacing: 0.2vh;
+            border: solid #222 .5vh;
+            border-radius: 1vh;
+            display: none;
+        }
+        
+        #fpanel_head {
+            height: 7vh;
+            border-bottom: solid #222 .5vh;
+            padding: .5vh;
+        }
+        
+        #fpanel_title {
+            float: left;
+            font-size: 3vh;
+            line-height: 7vh;
+            font-weight: bold;
+            margin-left: 1.5vh;
+        }
+        
+        #fpanel_close {
+            float: right;
+            font-size: 4vh;
+            line-height: 7vh;
+            font-weight: bold;
+            text-align: center;
+            width: 7vh;
+            background: #EEE;
+        }
+        
+        #fpanel_info {}
+        
+        #fpanel_text {
+            margin: .2vh 2vh;
+            font-size: 2.2vh;
+            line-height: 4vh;
+        }
+        
+        #fpanel_textbox {
+            outline: none;
+            width: 80%;
+            height: 5vh;
+            margin: 2vh 10%;
+            padding: .5vh 1vh;
+            box-sizing: border-box;
+            border: solid .2vh #222;
+            border-radius: 1.5vh;
+            font-size: 2.5vh;
+            line-height: 4vh;
+        }
+        
+        .fpanel_sepline {
+            margin: .2vh 2vh;
+            border-bottom: solid #222 .2vh;
+        }
+        
+        #fpanel_submit {
+            font-size: 3vh;
+            line-height: 8vh;
+            font-weight: bold;
+            text-align: center;
+            margin: .2vh 2vh;
+            background: #EEE;
+        }
+        
+        .strong {
+            font-weight: bold;
+        }
+        
+        .transparent {
+            opacity: 0;
+        }
+        
+        .clickselect {
+            -webkit-touch-callout: initial;
+            -webkit-user-select: initial;
+            -khtml-user-select: initial;
+            -moz-user-select: initial;
+            -ms-user-select: initial;
+            user-select: initial;
+        }
+        
+        .canpress {
+            cursor: pointer;
+            -webkit-transition: -webkit-filter .3s;
+        }
+        
+        .canpress:active {
+            -webkit-filter: invert(100%);
+        }
+        
+        .fullrefresh {
+            background: #EEE;
+            -webkit-animation: invert .8s;
+        }
+        
+        .refreshing {
+            -webkit-filter: invert(100%);
+        }
+        
+        @-webkit-keyframes invert {
+            0% {
+                -webkit-filter: invert(0%);
+            }
+            30% {
+                -webkit-filter: invert(100%);
+            }
+            60% {
+                -webkit-filter: invert(100%);
+            }
+            100% {
+                -webkit-filter: invert(0%);
+            }
+        }
+        
+        @-webkit-keyframes spinning {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="area">
+        <div id="loading">
+            <img id="loading_image" src="images/loading.png">
+            <div id="loading_bar">
+                <div id="loading_thumb"></div>
+            </div>
+        </div>
+
+        <div id="main">
+            <div id="head_bar">
+                <img id="head_icon" src="images/spin.svg">
+                <div id="head_title">Manga Push</div>
+                <div id="head_wifi">Wi-Fi</div>
+                <img id="head_wifiicon" src="images/wifi.svg">
+                <img id="head_battery" src="images/battery.svg">
+                <div id="head_time">21:40</div>
+                <div id="head_noti">連結失敗</div>
+            </div>
+            <div id="button_bar">
+                <div id="button_home" class="mainbutton canpress"><img src="images/home.svg">
+                </div>
+                <div id="button_back" class="mainbutton canpress"><img src="images/back.svg">
+                </div>
+                <div id="button_level" class="mainbutton canpress"><img src="images/level.svg">
+                </div>
+                <div id="button_shop" class="mainbutton canpress"><img src="images/shop.svg">
+                </div>
+                <div id="search_box"><img src="images/search.svg">
+                    <div id="search_text">Search</div>
+                </div>
+                <div id="button_setting" class="mainbutton canpress"><img src="images/setting.svg">
+                </div>
+            </div>
+            <div id="list" class="fullrefresh">
+                <div id="list_bar">
+                    <div id="list_text">5 Titles</div>
+                </div>
+
+                <div id="card01" class="card canpress" index="1">
+                    <div class="card_id">1.</div>
+                    <img src="http://ecx.images-amazon.com/images/I/615UJbdsjvL._SX314_BO1,204,203,200_.jpg" class="card_cover">
+                    <div class="card_info">
+                        <div class="card_title">海賊王</div>
+                        <div class="card_author">尾田 栄一郎</div>
+                        <div class="card_rates">★★★★☆</div>
+                    </div>
+                </div>
+
+                <div class="sepline"></div>
+
+                <div id="card02" class="card canpress" index="2">
+                    <div class="card_id">2.</div>
+                    <img src="http://images.dmzj.com/webpic/10/qinluewuzeiniang.jpg" class="card_cover">
+                    <div class="card_info">
+                        <div class="card_title">侵略！乌贼娘</div>
+                        <div class="card_author">安部真弘</div>
+                        <div class="card_rates">★★★★☆</div>
+                    </div>
+                </div>
+
+                <div class="sepline"></div>
+
+                <div id="card03" class="card canpress" index="3">
+                    <div class="card_id">3.</div>
+                    <img src="http://images.dmzj.com/webpic/16/160131kenanfml.jpg" class="card_cover">
+                    <div class="card_info">
+                        <div class="card_title">名偵探柯南</div>
+                        <div class="card_author">青山剛昌</div>
+                        <div class="card_rates">★★★★☆</div>
+                    </div>
+                </div>
+
+                <div class="sepline"></div>
+
+                <div id="card04" class="card canpress" index="4">
+                    <div class="card_id">4.</div>
+                    <img src="http://images.dmzj.com/webpic/19/1104xuanfengguanjiafml.jpg" class="card_cover">
+                    <div class="card_info">
+                        <div class="card_title">旋風管家</div>
+                        <div class="card_author">畑 健二郎</div>
+                        <div class="card_rates">★★★★☆</div>
+                    </div>
+                </div>
+
+                <div class="sepline"></div>
+
+                <div id="card05" class="card canpress" index="5">
+                    <div class="card_id">5.</div>
+                    <img src="http://images.dmzj.com/webpic/1/yijinan20130105.jpg" class="card_cover">
+                    <div class="card_info">
+                        <div class="card_title">一拳超人</div>
+                        <div class="card_author">村田雄介</div>
+                        <div class="card_rates">★★★★☆</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="detail" class="fullrefresh">
+                <img src="http://ecx.images-amazon.com/images/I/615UJbdsjvL._SX314_BO1,204,203,200_.jpg" id="detail_cover">
+                <div id="detail_info">
+                    <div id="detail_title">海賊王</div>
+                    <div id="detail_author">尾田 栄一郎</div>
+                    <div id="detail_rates">★★★★☆</div>
+                    <div id="detail_epi">最近更新：第814話</div>
+                    <div id="detail_from">來自: <a href="http://www.ishuhui.com" target="_blank">鼠繪漫畫網</a>
+                    </div>
+                    <div id="detail_push" class="detail_button canpress">推送至Kindle</div>
+                </div>
+                <div id="detail_des">...
+                </div>
+                <div class="detail_sepline"></div>
+                <div id="detail_list">
+                    <div id="detail_listtitle"><span class="strong">漫畫情報</span>
+                    </div>
+                    <div class="detail_listitem"><span class="strong">漫畫語言： </span><span id="detail_listitem01">中文</span>
+                    </div>
+                    <div class="detail_listitem"><span class="strong">漫畫類型： </span><span id="detail_listitem02">熱血</span>
+                    </div>
+                    <div class="detail_listitem"><span class="strong">發布日期： </span><span id="detail_listitem03">2015年1月</span>
+                    </div>
+                    <div class="detail_listitem"><span class="strong">來自網站： </span><span id="detail_listitem04"><a href="#" target="_blank">http://www.ishuhui.com</a></span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="shop_page" class="fullrefresh">
+                <iframe id="shop_iframe" src="http://m.dmzj.com" onscroll="iframeScroll"></iframe>
+            </div>
+
+            <div id="cover_panel"></div>
+
+            <div id="bright_panel" class="fullrefresh">
+                <div id="bpanel_topline"></div>
+                <div id="bpanel_arrow"></div>
+                <div id="upper_symbol" class="canpress">+</div>
+                <div id="level_blocks">
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                    <div class="block_in block"></div>
+                </div>
+                <div id="lower_symbol" class="canpress">_</div>
+                <div id="upper_text">當房間明亮時請將屏幕亮度調高。</div>
+                <div id="lower_text">當房間昏暗時請將屏幕亮度調低。</div>
+            </div>
+
+            <div id="setting_panel" class="fullrefresh">
+                <div id="spanel_topline"></div>
+                <div id="spanel_arrow"></div>
+                <div id="spanel_list">
+                    <a target="_blank" href="https://www.amazon.cn/Kindle电子书/b/ref=sd_allcat_kindle_l2_116169071?ie=UTF8&node=116169071">
+                        <div class="spanel_item canpress">Kindle商店</div>
+                    </a>
+                    <div class="spanel_sepline"></div>
+                    <a target="_blank" href="https://amazon.cn/">
+                        <div class="spanel_item canpress">亞馬遜中國</div>
+                    </a>
+                    <div class="spanel_sepline"></div>
+                    <a target="_blank" href="http://ishuhui.com">
+                        <div class="spanel_item canpress">鼠繪漫畫網</div>
+                    </a>
+                    <div class="spanel_sepline"></div>
+                    <a target="_blank" href="http://dmzj.com">
+                        <div class="spanel_item canpress">動漫之家漫畫網</div>
+                    </a>
+                    <div class="spanel_sepline"></div>
+                    <a target="_blank" href="https://github.com/Shinerising">
+                        <div class="spanel_item canpress">關於本頁面</div>
+                    </a>
+                </div>
+            </div>
+
+            <div id="float_panel" class="fullrefresh">
+                <div id="fpanel_head">
+                    <div id="fpanel_title">向Kindle推送漫畫</div>
+                    <div id="fpanel_close" class="canpress">×</div>
+                </div>
+                <div id="fpanel_info">
+                    <div id="fpanel_text">
+                        請依次進行以下操作：
+                        <br> 1.首先將<span class="transparent">q</span><span class="strong clickselect">manga<span>push</span>@<span>yahoo</span>.com</span><span class="transparent">p</span>設置為您Kindle帳戶的信任郵箱。
+                        <br> 2.然後在下方輸入您的Kindle推送郵箱地址。
+                        <br> 3.檢查無誤後點擊確認按鈕。
+                        <br>
+                        <span class="strong">
+                            注意！我們的服務器資源有限，請您不要反覆執行推送操作。
+                        </span>
+                    </div>
+                    <input id="fpanel_textbox" type="text" name="push_des" value="" placeholder="YourEmailAddress@Domain.com" autocomplete="on" maxlength="64" autofocus>
+                    <div class="fpanel_sepline"></div>
+                    <div id="fpanel_submit" class="canpress">確認推送</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        var last = 0;
+        var index = 0;
+        var opening = false;
+        var pushing = 'idle';
+        $(document).ready(function () {
+            setTime();
+            setInterval(setTime, 60000);
+
+            setTimeout(function () {
+                $('#area').css('opacity', '1');
+            }, 100);
+            setTimeout(function () {
+                $('#loading_bar').show();
+            }, 2000);
+            setTimeout(function () {
+                $('#loading_thumb').css('width', '0%');
+            }, 2000);
+            setTimeout(function () {
+                $('#loading_thumb').css('width', '60%');
+            }, 2500);
+            setTimeout(function () {
+                $('#loading_thumb').css('width', '100%');
+            }, 3000);
+            setTimeout(function () {
+                $('#loading').addClass('fullrefresh');
+            }, 5000);
+            setTimeout(function () {
+                $('#loading').hide();
+            }, 5300);
+            setTimeout(function () {
+                $('#main').show();
+            }, 5300);
+
+            $('#button_home').click(function () {
+                $(this).addClass('refreshing');
+                setTimeout(function () {
+                    $('#button_home').removeClass('refreshing');
+                }, 300);
+                setTimeout(function () {
+                    $('#list').show();
+                }, 300);
+                setTimeout(function () {
+                    $('#detail').hide();
+                }, 300);
+                setTimeout(function () {
+                    $('#shop_page').hide();
+                }, 300);
+
+                $('#head_title').text("Manga Push");
+                last = index;
+                index = 0;
+            });
+            $('#button_back').click(function () {
+                $(this).addClass('refreshing');
+                setTimeout(function () {
+                    $('#button_back').removeClass('refreshing');
+                }, 300);
+                if (index > 0) {
+                    setTimeout(function () {
+                        $('#list').show();
+                    }, 300);
+                    setTimeout(function () {
+                        $('#detail').hide();
+                    }, 300);
+
+                    $('#head_title').text("Manga Push");
+                    last = index;
+                    index = 0;
+                } else if (index == -1) {
+                    setTimeout(function () {
+                        $('#list').show();
+                    }, 300);
+                    setTimeout(function () {
+                        $('#shop_page').hide();
+                    }, 300);
+
+                    $('#head_title').text("Manga Push");
+                    last = index;
+                    index = 0;
+                } else if (last == -1) {
+                    setTimeout(function () {
+                        $('#shop_page').show();
+                    }, 300);
+                    setTimeout(function () {
+                        $('#list').hide();
+                    }, 300);
+                    setTimeout(function () {
+                        $('#detail').hide();
+                    }, 300);
+
+                    $('#head_title').text("商城頁面");
+                    last = index;
+                    index = -1;
+                } else if (last != 0) {
+                    setTimeout(function () {
+                        $('#list').hide();
+                    }, 300);
+                    setTimeout(function () {
+                        $('#detail').show();
+                    }, 300);
+
+                    $('#head_title').text("漫畫詳情");
+                    index = last;
+                    last = 0;
+                    updateDetail(index - 1);
+                }
+            });
+            $('#button_level').click(function () {
+                if ($('#bright_panel').css('display') == 'none') {
+                    $('#bright_panel').show();
+                    $('#cover_panel').show();
+                } else {
+                    $('#bright_panel').hide();
+                    $('#cover_panel').hide();
+                    $('#main').addClass('refreshing');
+                    setTimeout(function () {
+                        $('#main').removeClass('refreshing');
+                    }, 300);
+                }
+            });
+            $('#upper_symbol').click(function () {
+                var node = $('.block_in');
+                var n = $(node).index() - 1;
+                if (n >= 0) {
+                    node = $('.block')[n];
+                    $(node).addClass('block_in');
+                    $('#area').css('opacity', 1 - 0.5 / 24 * n + '');
+                }
+            });
+            $('#lower_symbol').click(function () {
+                var node = $('.block_in');
+                var n = $(node).index();
+                if (n < 24) {
+                    node = $('.block')[n];
+                    $(node).removeClass('block_in');
+                    n++;
+                    $('#area').css('opacity', 1 - 0.5 / 24 * n + '');
+                }
+            });
+            $('.block').mousedown(function () {
+                var n = $(this).index();
+                for (var i = 0; i < 24; i++) {
+                    var node = $('.block')[i];
+                    if (i < n) $(node).removeClass('block_in');
+                    else $(node).addClass('block_in');
+                }
+                $('#area').css('opacity', 1 - 0.5 / 24 * n + '');
+            });
+            $('#button_shop').click(function () {
+                $(this).addClass('refreshing');
+                setTimeout(function () {
+                    $('#button_shop').removeClass('refreshing');
+                }, 300);
+                setTimeout(function () {
+                    $('#shop_page').show();
+                }, 300);
+                setTimeout(function () {
+                    $('#list').hide();
+                }, 300);
+                setTimeout(function () {
+                    $('#detail').hide();
+                }, 300);
+
+                $('#head_title').text("商城頁面");
+                last = index;
+                index = -1;
+            });
+            $('#button_setting').click(function () {
+                if ($('#setting_panel').css('display') == 'none') {
+                    $('#setting_panel').show();
+                    $('#cover_panel').show();
+                } else {
+                    $('#setting_panel').hide();
+                    $('#cover_panel').hide();
+                    $('#main').addClass('refreshing');
+                    setTimeout(function () {
+                        $('#main').removeClass('refreshing');
+                    }, 300);
+                }
+            });
+            $('#detail_push').click(function () {
+                $('#float_panel').show();
+                $('#cover_panel').show();
+            });
+            $('#fpanel_close').click(function () {
+                $('#float_panel').hide();
+                $('#cover_panel').hide();
+                if (pushing == 'result') {
+                    pushing = 'idle';
+                    $('#fpanel_submit').text("確認推送");
+                }
+                $('#main').addClass('refreshing');
+                setTimeout(function () {
+                    $('#main').removeClass('refreshing');
+                }, 500);
+            });
+            $('#cover_panel').click(function () {
+                $('#bright_panel').hide();
+                $('#setting_panel').hide();
+                $('#float_panel').hide();
+                $('#cover_panel').hide();
+                if (pushing == 'result') {
+                    pushing = 'idle';
+                    $('#fpanel_submit').text("確認推送");
+                }
+                $('#main').addClass('refreshing');
+                setTimeout(function () {
+                    $('#main').removeClass('refreshing');
+                }, 500);
+            });
+            $('#fpanel_submit').click(function () {
+                var email = $('#fpanel_textbox').val();
+                if (pushing == 'result') {
+                    $('#fpanel_submit').text("確認推送");
+                    $('#fpanel_close').click();
+                } else if (pushing == 'idle') {
+                    if (validateEmail(email)) {
+                        $('#fpanel_submit').text("漫畫獲取中...");
+                        $("#head_icon").css("opacity", "1");
+                        pushing = 'pushing';
+
+                        url = "api.php?email=" + email + "&para1=" + data[index - 1].fromURL + "&para2=" + data[index - 1].para1 + "&para3=" + data[index - 1].para2 + "&title=" + data[index - 1].name + " " + data[index - 1].lastepi + "&author=" + data[index - 1].author;
+
+                        $('#fpanel_submit').text("漫畫推送中...");
+                        $.getJSON(url, function (response) {
+                                var dat = response;
+                                if (dat.status == 'succeed') {
+                                    $('#fpanel_submit').text("推送成功！！");
+                                    $("#head_icon").css("opacity", "0");
+                                    pushing = 'result';
+                                } else {
+                                    console.log(dat.message);
+                                    $('#fpanel_submit').text("推送失敗！！");
+                                    $("#head_icon").css("opacity", "0");
+                                    pushing = 'result';
+                                }
+                            })
+                            .fail(function (response) {
+                                console.log(response);
+                                $('#fpanel_submit').text("網路連結失敗！！");
+                                $("#head_icon").css("opacity", "0");
+                                pushing = 'result';
+                            });
+
+                    } else {
+                        $('#fpanel_submit').text("郵件地址錯誤！");
+                        setTimeout(function () {
+                            $('#fpanel_submit').text("確認推送");
+                        }, 1000);
+                    }
+                }
+            });
+            $('.card').click(function () {
+                if (!opening) {
+                    opening = true;
+                    $(this).addClass('refreshing');
+
+                    $('#head_icon').css("opacity", "1");
+                    $('#head_title').text("漫畫詳情");
+                    var ind = $(this).attr('index');
+                    updateDetail(ind - 1, function () {
+                        index = ind;
+                        opening = false;
+                        $('#head_icon').css("opacity", "0");
+                        setTimeout(function () {
+                            $('.card').removeClass('refreshing');
+                        }, 300);
+                        setTimeout(function () {
+                            $('#detail').show();
+                        }, 300);
+                        setTimeout(function () {
+                            $('#list').hide();
+                        }, 300);
+                    }, function () {
+                        opening = false;
+                        $('#head_icon').css("opacity", "0");
+                        $('#head_noti').show();
+                        setTimeout(function () {
+                            $('.card').removeClass('refreshing');
+                        }, 300);
+                        setTimeout(function () {
+                            $('#head_noti').hide();
+                        }, 3000);
+                    });
+                }
+            });
+        });
+
+        var iframe_top = 0;
+        var iframe_scrolling = false;
+        $('#shop_page').bind('mousewheel', function (event) {
+            if (!iframe_scrolling) {
+                if (event.originalEvent.wheelDelta > 0 && iframe_top < 0) {
+                    iframe_top += 200;
+                    if (iframe_top >= 0) iframe_top = 0;
+                    $('#shop_iframe').css('margin-top', iframe_top + 'px');
+                    iframe_scrolling = true;
+                    setTimeout(function () {
+                        iframe_scrolling = false;
+                    }, 300);
+                    $('#shop_page').addClass('refreshing');
+                    setTimeout(function () {
+                        $('#shop_page').removeClass('refreshing');
+                    }, 300);
+                } else if (event.originalEvent.wheelDelta < 0 && iframe_top + $('#shop_iframe').height() > 0) {
+                    iframe_top -= 200;
+                    if (iframe_top + $('#shop_iframe').height() <= 0) iframe_top = 0 - $('#shop_iframe').height();
+                    $('#shop_iframe').css('margin-top', iframe_top + 'px');
+                    iframe_scrolling = true;
+                    setTimeout(function () {
+                        iframe_scrolling = false;
+                    }, 500);
+                    $('#shop_page').addClass('refreshing');
+                    setTimeout(function () {
+                        $('#shop_page').removeClass('refreshing');
+                    }, 300);
+                }
+            }
+        });
+        $('#shop_iframe').click(function () {
+            $('#shop_page').addClass('refreshing');
+            setTimeout(function () {
+                $('#shop_page').removeClass('refreshing');
+            }, 300);
+        });
+
+        function addZero(i) {
+            if (i < 10) i = "0" + i;
+            return i;
+        }
+
+        function setTime() {
+            var d = new Date();
+            var time = d.getHours() + ':' + addZero(d.getMinutes());
+            $('#head_time').text(time);
+        }
+
+        function findElement(elements, title) {
+            var len = elements.length;
+            for (var i = 0; i < len; i++) {
+                if (contains(elements[i]['category'], title)) {
+                    return elements[i];
+                }
+            }
+            return null;
+        }
+
+        function contains(a, obj) {
+            var i = a.length;
+            while (i--) {
+                if (a[i] === obj) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function validateEmail(email) {
+            var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+
+        function updateDetail(index, succeed, fail) {
+            var feedURL = data[index].feed;
+            if (data[index].fromURL == 'http://manhua.dmzj.com/') {
+                var url = "https://query.yahooapis.com/v1/public/yql?format=json&q=select%20channel from xml where url='" + feedURL + "'";
+                var dat;
+                $.getJSON(url, function (response) {
+                        dat = response;
+
+                        var item = dat['query']['results']['rss']['channel']['item'][0];
+                        var patt = new RegExp("title='(.*?)'");
+                        data[index].lastepi = patt.exec(item['description'])[1];
+                        var date = new Date(item['pubDate'])
+                        data[index].lastdate = date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日";
+                        data[index].site = item['link'];
+                        patt = new RegExp("http:\/\/manhua.dmzj.com\/(.*?)\/");
+                        data[index].para1 = patt.exec(item['link'])[1];
+                        patt = new RegExp("http:\/\/manhua.dmzj.com\/.*?\/(.*?).shtml?");
+                        data[index].para2 = patt.exec(item['link'])[1];
+
+                        $('#detail_title').text(data[index].name);
+                        $('#detail_cover').attr('src', data[index].image);
+                        $('#detail_author').text(data[index].author);
+                        $('#detail_rates').text(data[index].rates);
+                        $('#detail_epi').text("最新更新： " + data[index].lastepi);
+                        $('#detail_from a').text(data[index].from);
+                        $('#detail_from a').attr('href', data[index].fromURL);
+                        $('#detail_des').text(data[index].des);
+                        $('#detail_listitem01').text(data[index].lang);
+                        $('#detail_listitem02').text(data[index].category);
+                        $('#detail_listitem03').text(data[index].lastdate);
+                        $('#detail_listitem04 a').attr('href', data[index].site);
+                        $('#detail_listitem04 a').text(data[index].site);
+
+                        succeed();
+
+                    })
+                    .fail(function () {
+                        fail();
+                    });
+            } else {
+                var url = "https://query.yahooapis.com/v1/public/yql?format=json&q=select%20channel from xml where url='" + feedURL + "'";
+                var dat;
+                $.getJSON(url, function (response) {
+                        dat = response;
+
+                        var items = dat['query']['results']['rss']['channel']['item'];
+                        var item = findElement(items, "海贼王");
+                        if (item != null) {
+                            var patt = new RegExp("第(.*?)话");
+                            data[index].lastepi = patt.exec(item['title'])[0];
+                            var date = new Date(item['pubDate'])
+                            data[index].lastdate = date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日";
+                            data[index].site = item['link'];
+                            patt = new RegExp("http://www.ishuhui.com/archives/(.*)");
+                            data[index].para2 = patt.exec(item['link'])[1];
+                        }
+
+                        $('#detail_title').text(data[index].name);
+                        $('#detail_cover').attr('src', data[index].image);
+                        $('#detail_author').text(data[index].author);
+                        $('#detail_rates').text(data[index].rates);
+                        $('#detail_epi').text("最新更新： " + data[index].lastepi);
+                        $('#detail_from a').text(data[index].from);
+                        $('#detail_from a').attr('href', data[index].fromURL);
+                        $('#detail_des').text(data[index].des);
+                        $('#detail_listitem01').text(data[index].lang);
+                        $('#detail_listitem02').text(data[index].category);
+                        $('#detail_listitem03').text(data[index].lastdate);
+                        $('#detail_listitem04 a').attr('href', data[index].site);
+                        $('#detail_listitem04 a').text(data[index].site);
+
+                        succeed();
+                    })
+                    .fail(function () {
+                        fail();
+                    });
+            }
+        }
+    </script>
+</body>
+
+</html>
