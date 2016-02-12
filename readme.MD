@@ -16,7 +16,7 @@ A PHP program that could automatically push the newest mangas to your kindle dev
 1. Edit the config for your personal usage
 2. Add user and manga list in settings.xml
 3. Upload all the files to your server
-4. Add a feed service to regularly trigger the program, the feed url is ` [YOUR_SERVER_HOST]/feed.php?user=[USER_NAME] `
+4. Add a feed service (like IFTTT) to regularly trigger the program, the feed url is ` [YOUR_SERVER_HOST]/feed.php?user=[USER_NAME] `
 
 ## Third Party Libraries
 
