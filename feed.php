@@ -161,7 +161,6 @@ else {
 					}
 				}
 				$images = loadSHUHUIImages($mgid);
-				print_r($images);
 				if(count($images)>0) {
 					if(createPDF($imgdir, $file, $images, (string)$title, (string)$author)) {
 						if(sendMail($des, $title, $file)) {

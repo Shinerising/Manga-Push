@@ -27,6 +27,7 @@ function checkImage($image, $format) {
     else if ($format=='.bmp')
         $imageTmp=imagecreatefromwbmp($image);
     else return 0;
+
     $width = imagesx($imageTmp);
     $height = imagesy($imageTmp);
     imagedestroy($imageTmp);
@@ -36,7 +37,7 @@ function checkImage($image, $format) {
 
 // Compress Image
 // Return the Ratio of Width & Height
-function compressImage($image, $format, $maxH, $quality) {
+function compressImage($image, $desimage, $format, $maxH, $quality) {
 
     if ($format=='.jpg')
         $imageTmp=imagecreatefromjpeg($image);
@@ -51,29 +52,15 @@ function compressImage($image, $format, $maxH, $quality) {
     $width = imagesx($imageTmp);
     $height = imagesy($imageTmp);
 
-    if($format=='.png') {
-        if($maxH!=-1){
-            $thumb_width = round($width * $maxH / $height);
-            $thumb_height = round($maxH );
-            imageinterlace($imageTmp, false);
-            $thumb = imagecreatetruecolor($thumb_width, $thumb_height);
-            imagecopyresampled($thumb, $imageTmp, 0, 0, 0, 0, $thumb_width, $thumb_height, $width, $height);
-            imagepng($thumb, $image, 9);
-            imagedestroy($thumb);
-        } else {
-            imageinterlace($imageTmp, false);
-            imagepng($imageTmp, $image, 9);
-        }
-    }
-    else if($format=='.jpg') {
-        if($maxH!=-1){
-            $thumb_width = round($width * $maxH / $height);
-            $thumb_height = round($maxH );
-            $thumb = imagecreatetruecolor($thumb_width, $thumb_height);
-            imagecopyresampled($thumb, $imageTmp, 0, 0, 0, 0, $thumb_width, $thumb_height, $width, $height);
-            imagejpeg($thumb, $image, $quality);
-            imagedestroy($thumb);
-        }
+    if($maxH!=-1){
+        $thumb_width = round($width * $maxH / $height);
+        $thumb_height = round($maxH );
+        $thumb = imagecreatetruecolor($thumb_width, $thumb_height);
+        imagecopyresampled($thumb, $imageTmp, 0, 0, 0, 0, $thumb_width, $thumb_height, $width, $height);
+        imagejpeg($thumb, $desimage, $quality);
+        imagedestroy($thumb);
+    } else {
+        imagejpeg($thumb, $desimage, $quality);
     }
     
     imagedestroy($imageTmp);
@@ -109,7 +96,7 @@ function createPDF($dir, $file, $images, $name, $author) {
         $maxH = 1080;
     } 
     else if($imgcount<128){
-        $quality = 50;
+        $quality = 60;
         $maxH = 640;
     } 
     if($imgcount>200) return false;
@@ -131,13 +118,15 @@ function createPDF($dir, $file, $images, $name, $author) {
         if($format=='.gif') continue;
 
         $ratio=1;
-        $imagefile=$dir.'image'.$key.$format;
+        $imagefile=$dir.'image'.$key.'.jpg';
         if(file_exists($imagefile)){
-            $ratio = checkImage($imagefile, $format);
+            $ratio = checkImage($imagefile, '.jpg');
         }
         else {
+            $imagefile=$dir.'image'.$key.$format;
             if(!copy($value, $imagefile)) return false;
-            $ratio = compressImage($imagefile, $format, $maxH, $quality);
+            $ratio = compressImage($imagefile, $dir.'image'.$key.'.jpg', $format, $maxH, $quality);
+            $imagefile=$dir.'image'.$key.'.jpg';
         }
         $pdf->AddPage();
         if($ratio > 1) {
