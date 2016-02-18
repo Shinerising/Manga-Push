@@ -134,7 +134,8 @@ else {
 				if($request_key==-1)continue;
 
 				preg_match("/第(.*?)话/", $manga_items[$request_key]->title, $output);
-				$episode=$output[0];
+				if($output[0]!=null)$episode=$output[0];
+				else $episode=$manga_items[$request_key]->title;
 				$title=$item->title.' '.$episode;
 				$author=$item->author;
 

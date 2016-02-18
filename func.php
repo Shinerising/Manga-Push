@@ -60,7 +60,7 @@ function compressImage($image, $desimage, $format, $maxH, $quality) {
         imagejpeg($thumb, $desimage, $quality);
         imagedestroy($thumb);
     } else {
-        imagejpeg($thumb, $desimage, $quality);
+        imagejpeg($imageTmp, $desimage, $quality);
     }
     
     imagedestroy($imageTmp);
