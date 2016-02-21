@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Manga Push</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta content="telephone=no" name="format-detection" />
@@ -19,12 +19,12 @@
             font-weight: 400;
             src: url(font/blisspro.otf);
         }
-        
+
         html {
             font-family: 'Bliss Pro Regular', sans-serif;
             font-size: 1vh;
         }
-        
+
         body {
             margin: 0;
             background: #000;
@@ -35,290 +35,290 @@
             -ms-user-select: none;
             user-select: none;
         }
-        
+
         a {
             color: #222;
         }
-        
+
         #area {
-            width: 75rem;
-            height: 100rem;
+            width: 75vh;
+            height: 100vh;
             overflow: hidden;
             position: relative;
             margin: 0 auto;
             opacity: 0;
             -webkit-transition: opacity 2s;
-            box-shadow: 0 0 10rem #BBB;
+            box-shadow: 0 0 10vh #BBB;
         }
-        
+
         #loading {
             width: 100%;
-            height: 100rem;
+            height: 100vh;
             overflow: hidden;
             background: #EEE;
             position: relative;
         }
-        
+
         #loading_image {
             width: 100%;
             height: 100%;
         }
-        
+
         #loading_bar {
             width: 70%;
-            height: 3.6rem;
+            height: 3.6vh;
             margin: 0 auto;
-            margin-top: -16rem;
-            border: solid #FFF .2rem;
-            border-radius: 1.8rem;
+            margin-top: -16vh;
+            border: solid #FFF .2vh;
+            border-radius: 1.8vh;
             display: none;
             overflow: hidden;
             position: relative;
         }
-        
+
         #loading_thumb {
             width: 0%;
             height: 100%;
-            border-radius: 0 1.8rem 1.8rem 0;
+            border-radius: 0 1.8vh 1.8vh 0;
             -webkit-transition: width 2s;
             background: #FFF;
         }
-        
+
         #logo {
             width: 100%;
             z-index: -1;
             text-align: center;
         }
-        
+
         #logo_title {
-            font-size: 6rem;
-            line-height: 18rem;
-            letter-spacing: -.2rem;
+            font-size: 6vh;
+            line-height: 18vh;
+            letter-spacing: -.2vh;
             color: #909088;
         }
-        
+
         #main {
             width: 100%;
-            height: 100rem;
+            height: 100vh;
             overflow: hidden;
             background: #EEE;
-            box-shadow: 0 0 10rem #BBB;
+            box-shadow: 0 0 10vh #BBB;
             -webkit-transition: -webkit-filter .3s;
             display: none;
         }
-        
+
         #head_bar {
             width: 100%;
-            height: 4rem;
+            height: 4vh;
             background: #EEE;
-            border-bottom: solid #888 0.2rem;
+            border-bottom: solid #888 0.2vh;
         }
-        
+
         #head_icon {
-            height: 4rem;
-            margin-left: 3rem;
-            margin-right: 1rem;
+            height: 4vh;
+            margin-left: 3vh;
+            margin-right: 1vh;
             display: none;
             float: left;
             -webkit-animation: spinning 1.6s infinite steps(8);
         }
-        
+
         #head_title {
-            width: 30rem;
-            margin-left: 4rem;
-            font-size: 2rem;
-            line-height: 4rem;
+            width: 30vh;
+            margin-left: 4vh;
+            font-size: 2vh;
+            line-height: 4vh;
             color: #222;
         }
-        
+
         #head_wifiicon {
-            height: 4rem;
+            height: 4vh;
             top: 0;
-            right: 18rem;
+            right: 18vh;
             position: absolute;
         }
-        
+
         #head_battery {
-            height: 4rem;
+            height: 4vh;
             top: 0;
-            right: 12rem;
+            right: 12vh;
             position: absolute;
         }
-        
+
         #head_time {
-            font-size: 2rem;
-            line-height: 4rem;
-            height: 4rem;
+            font-size: 2vh;
+            line-height: 4vh;
+            height: 4vh;
             top: 0;
-            right: 4rem;
+            right: 4vh;
             position: absolute;
             color: #222;
         }
-        
+
         #button_bar {
             width: 100%;
             height: auto;
             overflow: hidden;
             position: relative;
-            border-bottom: solid #888 0.2rem;
+            border-bottom: solid #888 0.2vh;
         }
-        
+
         #button_home {
-            margin-left: 2rem;
+            margin-left: 2vh;
         }
-        
+
         #search_box {
-            width: 21rem;
-            height: 7rem;
-            padding: .5rem 1rem;
-            margin-left: .4rem;
+            width: 21vh;
+            height: 7vh;
+            padding: .5vh 1vh;
+            margin-left: .4vh;
             background: #EEE;
             display: inline-block;
             position: relative;
-            border-left: solid #888 0.2rem;
-            border-right: solid #888 0.2rem;
+            border-left: solid #888 0.2vh;
+            border-right: solid #888 0.2vh;
         }
-        
+
         #search_box img {
             height: 100%;
         }
-        
+
         #search_text {
             position: absolute;
-            top: 2.5rem;
-            left: 8rem;
-            font-size: 2.5rem;
-            line-height: 3rem;
+            top: 2.5vh;
+            left: 8vh;
+            font-size: 2.5vh;
+            line-height: 3vh;
             color: #BBB;
         }
-        
+
         .mainbutton {
-            width: 7rem;
-            height: 7rem;
-            padding: .5rem .3rem;
-            margin: 0 .2rem;
+            width: 7vh;
+            height: 7vh;
+            padding: .5vh .3vh;
+            margin: 0 .1vh;
             cursor: pointer;
             background: #EEE;
             display: inline-block;
         }
-        
+
         .mainbutton img {
             height: 100%;
         }
-        
+
         #stage {
             width: 100%;
             height: 100%;
             position: relative;
         }
-        
+
         #stage_library {
-            width: 40rem;
-            height: 50rem;
-            padding: 0 1rem 0 4rem;
+            width: 40vh;
+            height: 50vh;
+            padding: 0 1vh 0 4vh;
             box-sizing: content-box;
             float: left;
         }
-        
+
         #stage_list {
-            width: 30rem;
-            height: 50rem;
-            padding: 0 4rem;
+            width: 30vh;
+            height: 50vh;
+            padding: 0 4vh;
             box-sizing: border-box;
             float: right;
         }
-        
+
         #stage_new {
             width: 100%;
-            height: 50rem;
-            padding: 0 4rem;
+            height: 50vh;
+            padding: 0 4vh;
             box-sizing: content-box;
             float: left;
         }
-        
+
         .stage_title span {
-            font-size: 2rem;
-            line-height: 8rem;
+            font-size: 2vh;
+            line-height: 8vh;
             cursor: pointer;
         }
-        
+
         .stage_libcover {
-            width: 25rem;
+            width: 25vh;
             float: left;
             position: relative;
             overflow: hidden;
         }
-        
+
         .stage_libcover_small {
-            width: 13rem;
+            width: 13vh;
             height: auto;
             float: right;
-            margin-bottom: 2rem;
+            margin-bottom: 2vh;
             position: relative;
             overflow: hidden;
         }
-        
+
         .scard_flag {
             display: none;
             opacity: 1;
             position: absolute;
-            right: 1rem;
+            right: 1vh;
             top: 0;
-            width: 4rem;
-            height: 5rem;
+            width: 4vh;
+            height: 5vh;
             background: #222;
             color: #EEE;
             -webkit-clip-path: polygon(100% 0%, 100% 70%, 50% 100%, 0% 70%, 0 0);
         }
-        
+
         .scard_flag span {
-            width: 4rem;
+            width: 4vh;
             display: block;
             overflow: hidden;
-            font-size: 1.2rem;
-            line-height: 4rem;
+            font-size: 1.2vh;
+            line-height: 4vh;
             text-align: center;
             letter-spacing: normal;
             white-space: nowrap;
             -webkit-mask-image: -webkit-gradient( linear, left top, right top, color-stop(0.0, rgba(0, 0, 0, 0)), color-stop(0.2, rgba(0, 0, 0, 1)), color-stop(0.8, rgba(0, 0, 0, 1)), color-stop(1.0, rgba(0, 0, 0, 0)));
         }
-        
+
         .scard_new {
             display: block;
             position: absolute;
-            right: -3rem;
-            top: 3rem;
-            width: 14rem;
-            height: 2rem;
+            right: -3vh;
+            top: 3vh;
+            width: 14vh;
+            height: 2vh;
             background: #222;
             color: #EEE;
             -webkit-transform: rotate(45deg);
         }
-        
+
         .scard_new span {
-            width: 14rem;
+            width: 14vh;
             display: block;
             overflow: hidden;
-            font-size: 1.5rem;
-            line-height: 2rem;
+            font-size: 1.5vh;
+            line-height: 2vh;
             text-align: center;
             letter-spacing: normal;
             white-space: nowrap;
         }
-        
+
         .scard_check {
             display: none;
             position: absolute;
-            left: 1rem;
-            bottom: 1rem;
-            width: 3rem;
-            height: 3rem;
+            left: 1vh;
+            bottom: 1vh;
+            width: 3vh;
+            height: 3vh;
             box-sizing: border-box;
             background: #222;
             border-radius: 50%;
-            padding: .5rem;
+            padding: .5vh;
         }
-        
+
         .scard_info {
             position: absolute;
             width: 100%;
@@ -328,250 +328,250 @@
             margin: 0;
             float: none;
         }
-        
+
         .scard_title {
-            width: 20rem;
+            width: 20vh;
             margin: 0 auto;
-            margin-top: 12rem;
-            font-size: 2.6rem;
+            margin-top: 12vh;
+            font-size: 2.6vh;
             text-align: center;
         }
-        
+
         .scard_author {
-            width: 20rem;
+            width: 20vh;
             margin: 0 auto;
-            font-size: 2.3rem;
+            font-size: 2.3vh;
             text-align: center;
         }
-        
+
         .stage_libcover_small .scard_new {
-            right: -4rem;
-            top: 2rem;
+            right: -4vh;
+            top: 2vh;
         }
-        
+
         .stage_libcover_small .scard_title {
-            width: 10rem;
-            margin-top: 6rem;
-            font-size: 1.8rem;
+            width: 10vh;
+            margin-top: 6vh;
+            font-size: 1.8vh;
             text-align: center;
         }
-        
+
         .stage_libcover_small .scard_author {
-            width: 10rem;
-            font-size: 1.6rem;
+            width: 10vh;
+            font-size: 1.6vh;
             text-align: center;
         }
-        
+
         .stage_cover {
             width: 100%;
-            border: solid #222 0.2rem;
+            border: solid #222 0.2vh;
             box-sizing: border-box;
             -webkit-filter: grayscale(100%);
         }
-        
+
         .slist_item {
-            height: 9rem;
-            margin-bottom: 1rem;
+            height: 9vh;
+            margin-bottom: 1vh;
             cursor: pointer;
-            border-bottom: solid #AAA 0.2rem;
+            border-bottom: solid #AAA 0.2vh;
         }
-        
+
         .slist_title {
-            font-size: 2rem;
-            line-height: 3rem;
-            max-height: 6rem;
+            font-size: 2vh;
+            line-height: 3vh;
+            max-height: 6vh;
             font-style: italic;
         }
-        
+
         .slist_author {
-            font-size: 1.6rem;
-            line-height: 2.5rem;
-            height: 2.5rem;
+            font-size: 1.6vh;
+            line-height: 2.5vh;
+            height: 2.5vh;
         }
-        
+
         .stage_reccover {
-            width: 15rem;
-            margin-right: 2rem;
+            width: 15vh;
+            margin-right: 2vh;
             display: inline-block;
         }
-        
+
         #list {
             width: 100%;
             height: 100%;
             position: relative;
         }
-        
+
         #list_bar {
             width: 100%;
-            height: 6rem;
+            height: 6vh;
             position: relative;
         }
-        
+
         .list_label {
-            font-size: 2rem;
-            line-height: 6rem;
+            font-size: 2vh;
+            line-height: 6vh;
             display: inline-block;
             position: absolute;
         }
-        
+
         #list_lb1 {
-            left: 4rem;
+            left: 4vh;
         }
-        
+
         #list_lb2 {
-            right: 2.5rem;
+            right: 2.5vh;
         }
-        
+
         .list_button {
             display: inline-block;
-            margin: 0 1rem;
+            margin: 0 1vh;
             cursor: pointer;
         }
-        
+
         .list_menu {
             position: absolute;
-            right: 2rem;
-            top: 7rem;
+            right: 2vh;
+            top: 7vh;
             width: auto;
             background: #EEE;
             z-index: 10;
-            border: solid #888 .2rem;
+            border: solid #888 .2vh;
             overflow: hidden;
             display: none;
         }
-        
+
         #list_mn1 {
-            right: 6rem;
+            right: 6vh;
         }
-        
+
         .list_menu div {
-            padding: 1.5rem 3rem;
-            width: 20rem;
-            margin: .5rem 0;
-            font-size: 2.5rem;
+            padding: 1.5vh 3vh;
+            width: 20vh;
+            margin: .5vh 0;
+            font-size: 2.5vh;
             background: #EEE;
         }
-        
+
         .list_mnitem img {
-            height: 2.5rem;
+            height: 2.5vh;
             float: right;
         }
-        
+
         .card {
             width: 100%;
-            height: 12.5rem;
+            height: 12.5vh;
             background: #EEE;
-            letter-spacing: 0.2rem;
+            letter-spacing: 0.2vh;
             overflow: hidden;
             position: relative;
         }
-        
+
         .card_id {
             display: inline-block;
             float: left;
-            margin-left: 5rem;
-            margin-top: .5rem;
-            width: 3rem;
-            font-size: 2rem;
+            margin-left: 5vh;
+            margin-top: .5vh;
+            width: 3vh;
+            font-size: 2vh;
             font-weight: bold;
         }
-        
+
         .card_cover {
-            width: 9rem;
-            height: 11.5rem;
-            margin-top: .5rem;
+            width: 9vh;
+            height: 11.5vh;
+            margin-top: .5vh;
             -webkit-filter: grayscale(100%);
             float: left;
         }
-        
+
         .card_info {
             width: 68%;
-            margin-top: 1.5rem;
-            margin-right: 4rem;
+            margin-top: 1.5vh;
+            margin-right: 4vh;
             float: right;
         }
-        
+
         .card_title {
-            font-size: 2.5rem;
+            font-size: 2.5vh;
             font-weight: bold;
-            line-height: 3rem;
+            line-height: 3vh;
         }
-        
+
         .card_author {
-            font-size: 2rem;
-            line-height: 4rem;
+            font-size: 2vh;
+            line-height: 4vh;
         }
-        
+
         .card_rates {
-            font-size: 1.6rem;
-            line-height: 2rem;
+            font-size: 1.6vh;
+            line-height: 2vh;
         }
-        
+
         .card_flag {
             display: none;
             opacity: 0;
             width: 0;
             height: 0;
         }
-        
+
         .card_new {
             display: none;
             opacity: 0;
             width: 0;
             height: 0;
             position: absolute;
-            right: -3rem;
-            top: 3rem;
+            right: -3vh;
+            top: 3vh;
             background: #222;
             color: #EEE;
             -webkit-transform: rotate(45deg);
         }
-        
+
         .card_check {
             display: none;
             position: absolute;
-            right: 8rem;
-            top: 5rem;
+            right: 8vh;
+            top: 5vh;
             left: auto;
             bottom: auto;
-            width: 3rem;
-            height: 3rem;
+            width: 3vh;
+            height: 3vh;
             box-sizing: border-box;
             background: #222;
             border-radius: 50%;
-            padding: .5rem;
+            padding: .5vh;
         }
-        
+
         .sepline {
-            border-bottom: solid #AAA 0.2rem;
-            margin-left: 8rem;
-            margin-right: 5rem;
+            border-bottom: solid #AAA 0.2vh;
+            margin-left: 8vh;
+            margin-right: 5vh;
         }
-        
+
         .list_thumb .card {
-            width: 20rem;
+            width: 20vh;
             height: auto;
-            margin-top: 1rem;
-            margin-left: 3.5rem;
-            margin-bottom: 3rem;
+            margin-top: 1vh;
+            margin-left: 3.5vh;
+            margin-bottom: 3vh;
             background: #EEE;
             display: inline-block;
         }
-        
+
         .list_thumb .card_cover {
             width: 100%;
             height: auto;
-            border: solid #222 0.2rem;
+            border: solid #222 0.2vh;
             box-sizing: border-box;
             margin-top: 0;
             margin-bottom: 0;
             -webkit-filter: grayscale(100%);
         }
-        
+
         .list_thumb .sepline {
             display: none;
         }
-        
+
         .list_thumb .card_info {
             position: absolute;
             width: 100%;
@@ -581,200 +581,200 @@
             margin: 0;
             float: none;
         }
-        
+
         .list_thumb .card_title {
-            width: 16rem;
+            width: 16vh;
             margin: 0 auto;
-            margin-top: 10rem;
-            font-size: 2.2rem;
+            margin-top: 10vh;
+            font-size: 2.2vh;
             text-align: center;
         }
-        
+
         .list_thumb .card_author {
-            width: 16rem;
+            width: 16vh;
             margin: 0 auto;
-            font-size: 2rem;
+            font-size: 2vh;
             text-align: center;
         }
-        
+
         .list_thumb .card_rates {
             display: none;
         }
-        
+
         .list_thumb .card_id {
             display: none;
         }
-        
+
         .list_thumb .card_flag {
             display: none;
             opacity: 1;
             position: absolute;
-            right: 1rem;
+            right: 1vh;
             top: 0;
-            width: 4rem;
-            height: 5rem;
+            width: 4vh;
+            height: 5vh;
             background: #222;
             color: #EEE;
             -webkit-clip-path: polygon(100% 0%, 100% 70%, 50% 100%, 0% 70%, 0 0);
         }
-        
+
         .list_thumb .infoload {
             display: none;
         }
-        
+
         #list_page {
             position: absolute;
-            right: 0rem;
-            bottom: 14rem;
-            width: 10rem;
-            height: 3rem;
+            right: 0vh;
+            bottom: 14vh;
+            width: 10vh;
+            height: 3vh;
             color: #222;
-            font-size: 2rem;
-            line-height: 3rem;
+            font-size: 2vh;
+            line-height: 3vh;
             text-align: center;
-            letter-spacing: 0.2rem;
+            letter-spacing: 0.2vh;
         }
-        
+
         .card_flag span {
-            width: 4rem;
+            width: 4vh;
             display: block;
             overflow: hidden;
-            font-size: 1.2rem;
-            line-height: 4rem;
+            font-size: 1.2vh;
+            line-height: 4vh;
             text-align: center;
             letter-spacing: normal;
             white-space: nowrap;
             -webkit-mask-image: -webkit-gradient( linear, left top, right top, color-stop(0.0, rgba(0, 0, 0, 0)), color-stop(0.2, rgba(0, 0, 0, 1)), color-stop(0.8, rgba(0, 0, 0, 1)), color-stop(1.0, rgba(0, 0, 0, 0)));
         }
-        
+
         .list_thumb .card_new {
             display: block;
             opacity: 1;
-            width: 14rem;
-            height: 2rem;
+            width: 14vh;
+            height: 2vh;
         }
-        
+
         .card_new span {
-            width: 14rem;
+            width: 14vh;
             display: block;
             overflow: hidden;
-            font-size: 1.5rem;
-            line-height: 2rem;
+            font-size: 1.5vh;
+            line-height: 2vh;
             text-align: center;
             letter-spacing: normal;
             white-space: nowrap;
         }
-        
+
         .list_thumb .card_check {
             position: absolute;
-            left: 1rem;
-            bottom: 1rem;
+            left: 1vh;
+            bottom: 1vh;
             right: auto;
             top: auto;
         }
-        
+
         .list_thumb .list_box {
             width: 0;
-            height: 32rem;
+            height: 32vh;
             display: inline-block;
-            margin-top: 1rem;
-            margin-bottom: 3rem;
+            margin-top: 1vh;
+            margin-bottom: 3vh;
         }
-        
+
         #detail {
             width: 100%;
             height: 100%;
-            letter-spacing: 0.2rem;
+            letter-spacing: 0.2vh;
             background: none;
             display: none;
         }
-        
+
         #detail_cover {
-            width: 20rem;
-            height: 28rem;
-            margin: 2rem;
+            width: 20vh;
+            height: 28vh;
+            margin: 2vh;
             -webkit-filter: grayscale(100%);
             float: left;
         }
-        
+
         #detail_info {
             width: 60%;
-            height: 28rem;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-            margin-right: 5rem;
+            height: 28vh;
+            margin-top: 2vh;
+            margin-bottom: 2vh;
+            margin-right: 5vh;
             float: right;
         }
-        
+
         #detail_title {
-            font-size: 2.8rem;
+            font-size: 2.8vh;
             font-weight: bold;
             line-height: 150%;
         }
-        
+
         #detail_author {
-            font-size: 2.5rem;
+            font-size: 2.5vh;
             line-height: 200%;
         }
-        
+
         #detail_rates {
-            font-size: 2rem;
+            font-size: 2vh;
             line-height: 200%;
         }
-        
+
         #detail_epi {
-            font-size: 2rem;
+            font-size: 2vh;
             font-weight: bold;
             line-height: 200%;
         }
-        
+
         #detail_from {
-            font-size: 2rem;
+            font-size: 2vh;
             line-height: 200%;
         }
-        
+
         #detail_des {
-            margin: 0 2rem;
-            font-size: 2rem;
+            margin: 0 2vh;
+            font-size: 2vh;
             line-height: 150%;
             text-align: justify;
         }
-        
+
         .detail_button {
             display: inline-block;
             width: auto;
-            height: 3rem;
-            margin: 1rem auto;
-            padding: 1rem 3rem;
-            font-size: 2rem;
+            height: 3vh;
+            margin: 1vh auto;
+            padding: 1vh 3vh;
+            font-size: 2vh;
             line-height: 150%;
             font-weight: bold;
             background: #EEE;
-            border: solid #222 .2rem;
-            border-bottom: solid #222 .4rem;
-            border-radius: .8rem;
+            border: solid #222 .2vh;
+            border-bottom: solid #222 .4vh;
+            border-radius: .8vh;
         }
-        
+
         .detail_sepline {
-            border-bottom: solid #222 0.2rem;
-            margin: 1rem 2rem;
+            border-bottom: solid #222 0.2vh;
+            margin: 1vh 2vh;
         }
-        
+
         #detail_list {
-            font-size: 2rem;
-            margin-left: 2rem;
+            font-size: 2vh;
+            margin-left: 2vh;
         }
-        
+
         #detail_listtitle {
-            font-size: 2.5rem;
+            font-size: 2.5vh;
             line-height: 150%;
-            margin-bottom: 2rem;
+            margin-bottom: 2vh;
         }
-        
+
         #detail_listitem04 a {
-            font-size: 2rem;
+            font-size: 2vh;
         }
-        
+
         #shop_page {
             width: 100%;
             height: 100%;
@@ -783,14 +783,14 @@
             -webkit-transition: -webkit-filter .3s;
             position: relative;
         }
-        
+
         #shop_iframe {
             width: 100%;
             height: 500%;
             -webkit-filter: grayscale(100%);
             border: none;
         }
-        
+
         #cover_panel {
             position: absolute;
             width: 100%;
@@ -799,242 +799,242 @@
             left: 0;
             display: none;
         }
-        
+
         #bright_panel {
             position: absolute;
-            left: 0rem;
-            top: 4rem;
+            left: 0vh;
+            top: 4vh;
             width: 100%;
-            height: 32rem;
+            height: 32vh;
             background: #EEE;
-            border: solid #888 .2rem;
+            border: solid #888 .2vh;
             overflow: hidden;
             display: none;
         }
-        
+
         #bpanel_blocks {
             display: flex;
             width: 100%;
         }
-        
+
         .bpanel_block {
             flex-grow: 1;
             text-align: center;
         }
-        
+
         .bpanel_button {
-            width: 8rem;
-            height: 10rem;
-            padding: 1rem;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
+            width: 8vh;
+            height: 10vh;
+            padding: 1vh;
+            margin-top: 2vh;
+            margin-bottom: 2vh;
             background: #EEE;
             display: inline-block;
             position: relative;
         }
-        
+
         .bpanel_buttontext {
-            font-size: 1.6rem;
+            font-size: 1.6vh;
         }
-        
+
         .bpanel_sepline {
-            border-bottom: solid #888 .2rem;
+            border-bottom: solid #888 .2vh;
         }
-        
+
         #bpanel_light {
             position: absolute;
-            bottom: 8rem;
-            left: 3rem;
-            height: 5rem;
-            width: 10rem;
-            font-size: 2rem;
+            bottom: 8vh;
+            left: 3vh;
+            height: 5vh;
+            width: 10vh;
+            font-size: 2vh;
         }
-        
+
         #upper_symbol {
             position: absolute;
-            bottom: 3rem;
-            right: 1rem;
-            height: 5rem;
-            width: 5rem;
+            bottom: 3vh;
+            right: 1vh;
+            height: 5vh;
+            width: 5vh;
             background: #EEE;
         }
-        
+
         #lower_symbol {
             position: absolute;
-            bottom: 3rem;
-            left: 1rem;
-            height: 5rem;
-            width: 5rem;
+            bottom: 3vh;
+            left: 1vh;
+            height: 5vh;
+            width: 5vh;
             background: #EEE;
         }
-        
+
         #level_blocks {
             position: absolute;
-            width: 61rem;
-            height: 3rem;
-            left: 7rem;
-            bottom: 5.5rem;
+            width: 61vh;
+            height: 3vh;
+            left: 7vh;
+            bottom: 5.5vh;
             z-index: 10;
         }
-        
+
         .block {
-            width: 1.9rem;
-            height: 1rem;
-            border: solid #222 .4rem;
-            margin: .1rem;
+            width: 1.9vh;
+            height: 1vh;
+            border: solid #222 .4vh;
+            /*margin: .1vh;*/
             cursor: pointer;
             box-sizing: border-box;
             display: inline-block;
             -webkit-transition: background .3s;
         }
-        
+
         .block_in {
             background: #222;
         }
-        
+
         .block:first-child {
             opacity: 0;
         }
-        
+
         .block span {
-            width: 1.1rem;
+            width: 1.1vh;
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.2vh;
             display: block;
-            margin-top: -3rem;
+            margin-top: -3vh;
             opacity: 0;
             -webkit-transition: opacity .5s;
         }
-        
+
         .block_in:last-child span {
             opacity: 1;
         }
-        
+
         #upper_text {
             position: absolute;
-            top: 9rem;
-            left: 12rem;
-            width: 30rem;
-            font-size: 2.3rem;
+            top: 9vh;
+            left: 12vh;
+            width: 30vh;
+            font-size: 2.3vh;
             font-weight: bold;
         }
-        
+
         #lower_text {
             position: absolute;
-            top: 48rem;
-            left: 12rem;
-            width: 30rem;
-            font-size: 2.3rem;
+            top: 48vh;
+            left: 12vh;
+            width: 30vh;
+            font-size: 2.3vh;
             font-weight: bold;
         }
-        
+
         #setting_panel {
             position: absolute;
-            left: 40rem;
-            top: 13rem;
-            width: 34rem;
+            left: 40vh;
+            top: 13vh;
+            width: 34vh;
             background: #EEE;
-            letter-spacing: 0.2rem;
-            border: solid #888 .2rem;
+            letter-spacing: 0.2vh;
+            border: solid #888 .2vh;
             overflow: hidden;
             display: none;
         }
-        
+
         .spanel_item {
-            padding: 1.5rem 3rem;
-            margin: .5rem 0;
-            font-size: 2.5rem;
+            padding: 1.5vh 3vh;
+            margin: .5vh 0;
+            font-size: 2.5vh;
             background: #EEE;
         }
-        
+
         #spanel_list a {
             text-decoration: none;
         }
-        
+
         .spanel_sepline {
             width: 100%;
-            border-bottom: solid #BBB 0.1rem;
+            border-bottom: solid #BBB 0.1vh;
         }
-        
+
         #float_panel {
             position: absolute;
-            width: 58rem;
-            top: 25rem;
-            left: 8rem;
+            width: 58vh;
+            top: 25vh;
+            left: 8vh;
             background: #EEE;
-            letter-spacing: 0.2rem;
-            border: solid #222 .5rem;
-            border-radius: 1rem;
+            letter-spacing: 0.2vh;
+            border: solid #222 .5vh;
+            border-radius: 1vh;
             display: none;
         }
-        
+
         #fpanel_head {
-            height: 7rem;
-            border-bottom: solid #222 .5rem;
-            padding: .5rem;
+            height: 7vh;
+            border-bottom: solid #222 .5vh;
+            padding: .5vh;
         }
-        
+
         #fpanel_title {
             float: left;
-            font-size: 3rem;
-            line-height: 7rem;
+            font-size: 3vh;
+            line-height: 7vh;
             font-weight: bold;
-            margin-left: 1.5rem;
+            margin-left: 1.5vh;
         }
-        
+
         #fpanel_close {
             float: right;
-            font-size: 4rem;
-            line-height: 7rem;
+            font-size: 4vh;
+            line-height: 7vh;
             font-weight: bold;
             text-align: center;
-            width: 7rem;
+            width: 7vh;
             background: #EEE;
         }
-        
+
         #fpanel_info {}
-        
+
         #fpanel_text {
-            margin: .2rem 2rem;
-            font-size: 2.2rem;
-            line-height: 4rem;
+            margin: .2vh 2vh;
+            font-size: 2.2vh;
+            line-height: 4vh;
         }
-        
+
         #fpanel_textbox {
             outline: none;
             width: 80%;
-            height: 5rem;
-            margin: 2rem 10%;
-            padding: .5rem 1rem;
+            height: 5vh;
+            margin: 2vh 10%;
+            padding: .5vh 1vh;
             box-sizing: border-box;
-            border: solid .2rem #222;
-            border-radius: 1.5rem;
-            font-size: 2.5rem;
-            line-height: 4rem;
+            border: solid .2vh #222;
+            border-radius: 1.5vh;
+            font-size: 2.5vh;
+            line-height: 4vh;
         }
-        
+
         .fpanel_sepline {
-            margin: .2rem 2rem;
-            border-bottom: solid #222 .2rem;
+            margin: .2vh 2vh;
+            border-bottom: solid #222 .2vh;
         }
-        
+
         #fpanel_submit {
-            font-size: 3rem;
-            line-height: 8rem;
+            font-size: 3vh;
+            line-height: 8vh;
             font-weight: bold;
             text-align: center;
-            margin: .2rem 2rem;
+            margin: .2vh 2vh;
             background: #EEE;
         }
-        
+
         .strong {
             font-weight: bold;
         }
-        
+
         .transparent {
             opacity: 0;
         }
-        
+
         .clickselect {
             -webkit-touch-callout: initial;
             -webkit-user-select: initial;
@@ -1043,74 +1043,74 @@
             -ms-user-select: initial;
             user-select: initial;
         }
-        
+
         .canpress {
             cursor: pointer;
             -webkit-transition: -webkit-filter .3s;
         }
-        
+
         .canpress:active {
             -webkit-filter: invert(100%);
         }
-        
+
         .fullrefresh {
             background: #EEE;
             -webkit-animation: grayInvert .8s;
         }
-        
+
         .loaded {
             -webkit-animation: grayInvert .5s;
         }
-        
+
         .refreshing {
             -webkit-filter: invert(100%);
         }
-        
+
         #bit_area {
             display: none;
             position: absolute;
-            left: 1rem;
-            top: 1rem;
-            width: 8rem;
-            height: 8rem;
+            left: 1vh;
+            top: 1vh;
+            width: 8vh;
+            height: 8vh;
             background: #EEE;
             -webkit-filter: grayscale(100%);
         }
-        
+
         .bit_grid {
             float: left;
             width: 6.25%;
             height: 6.25%;
         }
-        
+
         .white {
             background: #FFE;
         }
-        
+
         .gray {
             background: #DDD;
         }
-        
+
         .dark {
             background: #555;
         }
-        
+
         .black {
             background: #000;
         }
-        
+
         .lgreen {
             background: #6EA;
         }
-        
+
         .green {
             background: #393;
         }
-        
+
         .pink {
             background: #D59;
         }
-        
+
         @-webkit-keyframes grayInvert {
             0% {
                 -webkit-filter: invert(0%) grayscale(100%);
@@ -1125,7 +1125,7 @@
                 -webkit-filter: invert(0%) grayscale(100%);
             }
         }
-        
+
         @-webkit-keyframes invert {
             0% {
                 -webkit-filter: invert(0%);
@@ -1140,7 +1140,7 @@
                 -webkit-filter: invert(0%);
             }
         }
-        
+
         @-webkit-keyframes spinning {
             0% {
                 -webkit-transform: rotate(0deg);
@@ -1154,7 +1154,7 @@
 
 <body>
     <style>
-        @media only screen and (max-aspect-ratio: 3/4) {
+        /*@media only screen and (max-aspect-ratio: 3/4) {
             html {
                 font-size: 1.33vw;
             }
@@ -1162,7 +1162,7 @@
                 width: 100vw;
                 height: 100vh;
             }
-        }
+        }*/
     </style>
 
     <div id="area">
@@ -1563,7 +1563,7 @@
                             注意！我們的服務器資源有限，請您不要反覆執行推送操作。
                         </span>
                     </div>
-                    <input id="fpanel_textbox" type="text" name="push_des" value="" placeholder="YourEmailAddress@Domain.com" autocomplete="on" maxlength="64" autofocus>
+                    <input id="fpanel_textbox" type="text" name="push_des" value="" placeholder="YouvhailAddress@Domain.com" autocomplete="on" maxlength="64" autofocus>
                     <div class="fpanel_sepline"></div>
                     <div id="fpanel_submit" class="canpress">確認推送</div>
                 </div>
@@ -1708,7 +1708,7 @@
                     createDance();
                     $('#bit_area').show();
                     $('#button_allsetting .bpanel_buttontext').text("MikuMikuDance");
-                    $('#button_allsetting .bpanel_buttontext').css('margin-left', '-1.4rem');
+                    $('#button_allsetting .bpanel_buttontext').css('margin-left', '-1.4vh');
                     setInterval(goDance, 300);
                 }
             });
