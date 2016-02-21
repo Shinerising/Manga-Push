@@ -20,6 +20,8 @@ header('Content-type: text/xml; charset=utf-8');
 
 $xml=simplexml_load_file("settings.xml");
 
+if($_GET['interval']!=null) $GLOBALS['push_interval']=$_GET['interval'];
+
 $cuser=$_GET['user'];
 
 $email_list=$GLOBALS['email_list'];
@@ -125,7 +127,7 @@ else {
 				$id=0;
 				foreach ($manga_items as $key=>$value) {
 					if(inCategory($item->title, $value->xpath('category'))) {
-						preg_match("/http:\/\/www.ishuhui.com\/archives\/(.*)/", $value->link, $output);
+						preg_match("/http:\/\/www.ishuhui.com\/post\/(.*)/", $value->link, $output);
 						$id = $output[1];
 						if($id!=$item->lastlink) $request_key=$key;
 						else break;
@@ -139,7 +141,7 @@ else {
 				$title=$item->title.' '.$episode;
 				$author=$item->author;
 
-				preg_match("/http:\/\/www.ishuhui.com\/archives\/(.*)/", $manga_items[$request_key]->link, $output);
+				preg_match("/http:\/\/www.ishuhui.com\/post\/(.*)/", $manga_items[$request_key]->link, $output);
 				$mgid = $output[1];
 				$name = $item->name;
 
