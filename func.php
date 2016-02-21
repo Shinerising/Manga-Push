@@ -197,7 +197,7 @@ function loadDMZJImages($name, $id) {
 
 // Get the Images URL of ISHUHUI Manga
 function loadSHUHUIImages($id) {
-    $url='http://www.ishuhui.com/archives/'.$id;
+    $url='http://www.ishuhui.com/post/'.$id;
     $content=file_get_contents($url);
     preg_match_all("/<img src=\"(.*?)\" alt/", $content, $output);
     $images=$output[1];
