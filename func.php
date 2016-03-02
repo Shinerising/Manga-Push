@@ -87,17 +87,21 @@ function createPDF($dir, $file, $images, $name, $author) {
     $imgcount=count($images);
     $quality=20;
     $maxH=480;
-    if($imgcount<32){
+    if($imgcount<16){
         $quality = 100;
         $maxH = -1;
     } 
-    else if($imgcount<64){
+    else if($imgcount<32){
         $quality = 80;
+        $maxH = -1;
+    } 
+    else if($imgcount<64){
+        $quality = 60;
         $maxH = 1080;
     } 
     else if($imgcount<128){
-        $quality = 60;
-        $maxH = 640;
+        $quality = 40;
+        $maxH = 960;
     } 
     if($imgcount>200) return false;
 
