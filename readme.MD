@@ -2,7 +2,7 @@
 
 A PHP program that could automatically push the newest mangas to your kindle devices.
 
-**Attention: The source sites of the mangas are Chinese website so all the mangas are in Chinese. However you can edit the code to make it support more sources but it only pushes Chinese version by now.**
+**The resource manga websites we used have disabled the images copy function, so that this project have to close:( I will keep seeking new resources and thank you for your attention.**
 
 ## Features
 

@@ -146,7 +146,8 @@ function createPDF($dir, $file, $images, $name, $author) {
             $pdf->Image($imagefile,(92 - 122 * $ratio) / 2,0,0,122);
         }
     }
-
+    array_map('unlink', glob("$dir/*.*"));
+    rmdir($dir);
     $dir='pdf/';
     if(!is_dir($dir)) mkdir($dir);
     $pdf->Output('F', $file);
