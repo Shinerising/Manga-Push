@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" viewBox="0 0 64 64" xml:space="preserve">
+<font horiz-adv-x="1000">
+<!-- Copyright (c) JT Types Ltd, 2006. All rights reserved. -->
+<!-- Copyright: Copyright 2016 Adobe System Incorporated. All rights reserved. -->
+<font-face font-family="BlissPro" units-per-em="1000" underline-position="-100" underline-thickness="50"/>
+<missing-glyph horiz-adv-x="550" d="M50,0l450,0l0,659l-450,0M101,48l0,563l348,0l0,-563M231,222l42,28C265,259 256,269 256,285C256,328 388,366 388,457C388,510 347,548 282,548C235,548 194,527 165,497l27,-35C219,486 246,501 277,501C309,501 332,483 332,454C332,380 202,358 202,282C202,260 211,242 231,222M255,107C276,107 292,124 292,146C292,169 276,186 255,186C233,186 217,169 217,146C217,124 233,107 255,107z"/>
+<glyph unicode="e" horiz-adv-x="473" d="M434,217l0,22C434,390 363,485 239,485C118,485 39,384 39,240C39,105 111,-10 268,-10C322,-10 379,5 423,33l-27,61C363,76 324,62 278,62C185,62 130,128 129,217M129,283C130,355 171,415 239,415C310,415 342,349 343,283z"/>
+<glyph unicode="o" horiz-adv-x="525" d="M262,-10C398,-10 487,98 487,237C487,377 397,485 263,485C127,485 38,377 38,237C38,98 127,-10 262,-10M262,63C179,63 129,136 129,237C129,339 179,412 263,412C346,412 396,339 396,237C396,136 346,63 262,63z"/>
+<glyph unicode="r" horiz-adv-x="334" d="M62,0l88,0l0,344C194,387 225,405 258,405C274,405 289,401 304,393l31,78C321,480 299,485 279,485C235,485 196,468 146,415l-10,58l-74,0z"/>
+<glyph unicode="s" horiz-adv-x="392" d="M24,32C57,11 111,-10 177,-10C275,-10 357,34 357,131C357,293 135,259 135,355C135,400 174,413 218,413C265,413 304,401 338,386l0,76C304,475 261,485 214,485C107,485 48,426 48,351C48,194 270,226 270,130C270,81 227,62 174,62C123,62 82,80 52,98z"/>
+<glyph unicode="t" horiz-adv-x="360" d="M217,-10C264,-10 311,5 342,27l-29,61C294,76 267,63 237,63C206,63 189,81 189,123l0,279l118,0l24,71l-142,0l0,136l-88,-28l0,-108l-81,0l0,-71l81,0l0,-296C101,32 144,-10 217,-10z"/>
+</font>
+
+	<circle cx="32" cy="36" r="2"/>
+<circle cx="41" cy="36" r="2"/>
+<polygon points="45.3,23 42.1,29 31.9,29 23.9,14 15,14 15,17 22.1,17 30.1,32 43.9,32 48.7,23 "/>
+<text transform="matrix(1.0445 0 0 1 16.1821 50.0225)" font-family="'BlissPro'" font-size="15.3179px">s</text>
+<text transform="matrix(1.0445 0 0 1 22.7739 50.0225)" font-family="'BlissPro'" font-size="15.3179px">t</text>
+<text transform="matrix(1.0445 0 0 1 28.0537 50.0225)" font-family="'BlissPro'" font-size="15.3179px">o</text>
+<text transform="matrix(1.0445 0 0 1 35.9736 50.0225)" font-family="'BlissPro'" font-size="15.3179px">r</text>
+<text transform="matrix(1.0445 0 0 1 40.6133 50.0225)" font-family="'BlissPro'" font-size="15.3179px">e</text>
+</svg>
