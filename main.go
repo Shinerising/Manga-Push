@@ -47,7 +47,7 @@ type Config struct {
 func getJson(path string, target interface{}) error {
     file, err := ioutil.ReadFile(path)
     if err != nil {
-        log.Panic(err)
+        log.Print(err)
     }
 
     return json.Unmarshal(file, target)
@@ -56,12 +56,12 @@ func getJson(path string, target interface{}) error {
 func pageHandler(w http.ResponseWriter, r *http.Request) {
     t, err := template.ParseFiles("./views/index.html")
     if err != nil {
-        log.Panic(err)
+        log.Print(err)
         return
     }
     err = t.Execute(w, nil)
     if err != nil {
-        log.Panic(err)
+        log.Print(err)
         return
     }
 }
@@ -113,18 +113,18 @@ func fetchHandler(w http.ResponseWriter, r *http.Request) {
     if os.IsNotExist(err) {
 	    response, err := http.Get(url)
 	    if err != nil {
-	        log.Panic(err)
+	        log.Print(err)
 	    }
 
 	    defer response.Body.Close()
 
 	    file, err := os.Create(name)
 	    if err != nil {
-	        log.Panic(err)
+	        log.Print(err)
 	    }
 	    _, err = io.Copy(file, response.Body)
 	    if err != nil {
-	        log.Panic(err)
+	        log.Print(err)
 	    }
 	    file.Close()
     }
@@ -140,7 +140,7 @@ func bookManagement(id string) bool {
 
 	book, err := downloadBook(id)
     if err != nil {
-        log.Panic(err)
+        log.Print(err)
         if err.Error() == "Not Found" {
     		return false
     	} else {
@@ -164,7 +164,7 @@ func bookManagement(id string) bool {
 	jsonString, _ := json.Marshal(bookinfo)
     err = ioutil.WriteFile("./bookinfo/" + strconv.Itoa(bookid) + ".json", jsonString, 0644)
     if err != nil {
-        log.Panic(err)
+        log.Print(err)
     }
     return true
 }
@@ -215,7 +215,7 @@ func taskHandler () {
 	jsonString, _ := json.Marshal(config)
     err = ioutil.WriteFile("./config/config.json", jsonString, 0644)
     if err != nil {
-        log.Panic(err)
+        log.Print(err)
         return
     }
 }
@@ -256,7 +256,7 @@ func downloadBook(id string) (Book, error) {
 
 	    err := json.Unmarshal([]byte(book.NewData.ContentImg), &objmap)
 	    if err != nil {
-			log.Panic(err)
+			log.Print(err)
 			return book, errors.New("Invalid JSON")
 		}
 	    for k := range objmap {
@@ -272,7 +272,7 @@ func downloadBook(id string) (Book, error) {
 
     	files, err := ioutil.ReadDir("./books/" + id)
 	    if err != nil {
-	        log.Panic(err)
+	        log.Print(err)
 			return book, errors.New("Folder Error")
 	    }
 
@@ -299,7 +299,7 @@ func downloadBook(id string) (Book, error) {
 
 		err = pdf.OutputFileAndClose("./books/" + id + ".pdf")
 		if err != nil {
-	        log.Panic(err)
+	        log.Print(err)
 			return book, errors.New("PDF Error")
 	    }
     }
@@ -313,7 +313,7 @@ func downloadImage(id string, name string, url string) {
 
     response, err := http.Get(url)
     if err != nil {
-        log.Panic(err)
+        log.Print(err)
     }
 
     defer response.Body.Close()
@@ -323,22 +323,22 @@ func downloadImage(id string, name string, url string) {
 
 	    file, err := os.Create(new_name)
 	    if err != nil {
-	        log.Panic(err)
+	        log.Print(err)
 	    }
 	    img, _, err := image.Decode(response.Body)
 		if err != nil {
-	        log.Panic(err)
+	        log.Print(err)
 		}
 		jpeg.Encode(file, img, &jpeg.Options{ 100 })
     	file.Close()
 	} else {
 	    file, err := os.Create(name)
 	    if err != nil {
-	        log.Panic(err)
+	        log.Print(err)
 	    }
 		_, err = io.Copy(file, response.Body)
 		if err != nil {
-		    log.Panic(err)
+		    log.Print(err)
 		}
     	file.Close()
 	}
@@ -347,18 +347,18 @@ func downloadImage(id string, name string, url string) {
 func downloadJson(url string, path string) {
 	response, err := http.Get(url)
     if err != nil {
-        log.Panic(err)
+        log.Print(err)
     }
 
     defer response.Body.Close()
 
     file, err := os.Create(path)
     if err != nil {
-        log.Panic(err)
+        log.Print(err)
     }
     _, err = io.Copy(file, response.Body)
     if err != nil {
-        log.Panic(err)
+        log.Print(err)
     }
     file.Close()
 }
