@@ -373,8 +373,8 @@ func main() {
     http.HandleFunc("/download", downloadHandler)
     port := os.Getenv("PORT")
     if port == "" {
-    	port = ":8080"
+    	port = "8080"
     }
-    http.ListenAndServe(port, nil)
+    http.ListenAndServe(":" + port, nil)
 	fmt.Println("Start Listening to " + port)
 }
