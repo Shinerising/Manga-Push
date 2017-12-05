@@ -171,6 +171,7 @@ func bookManagement(id string) bool {
 
 func startTask() {
 	fmt.Println("Start Task!")
+	taskHandler()
 	_, err := os.Stat("./config/")
     if os.IsNotExist(err) {
     	_ = os.Mkdir("./config/", os.ModePerm)
@@ -375,6 +376,6 @@ func main() {
     if port == "" {
     	port = "8080"
     }
-    http.ListenAndServe(":" + port, nil)
 	fmt.Println("Start Listening to " + port)
+    http.ListenAndServe(":" + port, nil)
 }

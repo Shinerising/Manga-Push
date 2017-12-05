@@ -2225,20 +2225,10 @@
                             list.push(dat.data.data[idx].book);
                         }
                     });
-                    $.getJSON('https://api.ishuhui.com/cartoon/book_list/ver/76906890/category/2.json', function (response) {
-                            var dat = response;
-                            var i = 0;
-                            $('.stage_reccover').map(function(idx, item) {
-                                while(i < dat.data.length & list.includes(dat.data[i].id)) {
-                                    i += 1;
-                                }
-                                if(dat.data[i]) {
-                                    $(item).attr('index', dat.data[i].id);
-                                    $(item).find('.stage_cover').attr('src', '/fetch?url=http://pic01.ishuhui.com' + dat.data[i].thumb.slice(7));
-                                }
-                                i += 1;
-                            });
-                        })
+                    $('.stage_reccover').map(function(idx, item) {
+                        $(item).attr('index', dat.data.data[idx + 3].book);
+                        $(item).find('.stage_cover').attr('src', '/fetch?url=http://pic01.ishuhui.com' + dat.data.data[idx + 3].thumb.slice(7));
+                    });
                 })
         }
 
