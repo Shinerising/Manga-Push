@@ -1,1 +1,1 @@
-web: main
+web: go build main.go && ./main
