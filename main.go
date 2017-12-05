@@ -371,5 +371,9 @@ func main() {
     http.HandleFunc("/fetch", fetchHandler)
     http.HandleFunc("/detail", detailHandler)
     http.HandleFunc("/download", downloadHandler)
-    http.ListenAndServe(":80", nil)
+    port := os.Getenv("PORT")
+    if port == "" {
+    	return http.ListenAndServe(":8080", nil)
+    }
+    return http.ListenAndServe(port, nil)
 }
