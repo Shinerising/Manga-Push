@@ -12,10 +12,10 @@
 
 .DS_Store
 
-bookinfo
-books
-config
-tmp
+bookinfo/
+books/
+config/
+tmp/
 
 settings_alter.xml
 
