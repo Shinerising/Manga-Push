@@ -1503,7 +1503,7 @@
             </div>
 
             <div id="shop_page" class="fullrefresh">
-                <iframe id="shop_iframe" src="http://m.dmzj.com" onscroll="iframeScroll"></iframe>
+                <iframe id="shop_iframe" src="https://m.dmzj.com" onscroll="iframeScroll"></iframe>
             </div>
 
             <div id="cover_panel"></div>
@@ -2212,7 +2212,7 @@
         }
 
         function updateIndex() {
-            $.getJSON('http://api.ishuhui.com/cartoon/category_latest/ver/07218148/category/1.json', function (response) {
+            $.getJSON('https://api.ishuhui.com/cartoon/category_latest/ver/07218148/category/1.json', function (response) {
                     var dat = response;
                     var list = [];
                     $('.stage_libcover').map(function(idx, item) {
@@ -2225,7 +2225,7 @@
                             list.push(dat.data.data[idx].book);
                         }
                     });
-                    $.getJSON('http://hhzapi.ishuhui.com/cartoon/book_list/ver/76906890/category/2.json', function (response) {
+                    $.getJSON('https://hhzapi.ishuhui.com/cartoon/book_list/ver/76906890/category/2.json', function (response) {
                             var dat = response;
                             var i = 0;
                             $('.stage_reccover').map(function(idx, item) {
@@ -2243,7 +2243,7 @@
         }
 
         function updateDetail(index, succeed, fail) {
-            var url = "http://hhzapi.ishuhui.com/cartoon/book/ver/76906890/id/" + index + ".json";
+            var url = "https://hhzapi.ishuhui.com/cartoon/book/ver/76906890/id/" + index + ".json";
             $.getJSON(url, function (response) {
                     var dat = response;
 
