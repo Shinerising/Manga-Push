@@ -12,6 +12,11 @@
 
 .DS_Store
 
+books/
+bookinfo/
+config/
+tmp/
+
 settings_alter.xml
 
 config_default.php
