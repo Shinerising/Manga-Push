@@ -371,5 +371,5 @@ func main() {
     http.HandleFunc("/fetch", fetchHandler)
     http.HandleFunc("/detail", detailHandler)
     http.HandleFunc("/download", downloadHandler)
-    http.ListenAndServe(":8080", nil)
+    http.ListenAndServe(":80", nil)
 }
