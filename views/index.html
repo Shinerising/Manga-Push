@@ -2225,7 +2225,7 @@
                             list.push(dat.data.data[idx].book);
                         }
                     });
-                    $.getJSON('https://hhzapi.ishuhui.com/cartoon/book_list/ver/76906890/category/2.json', function (response) {
+                    $.getJSON('https://api.ishuhui.com/cartoon/book_list/ver/76906890/category/2.json', function (response) {
                             var dat = response;
                             var i = 0;
                             $('.stage_reccover').map(function(idx, item) {
@@ -2243,7 +2243,7 @@
         }
 
         function updateDetail(index, succeed, fail) {
-            var url = "https://hhzapi.ishuhui.com/cartoon/book/ver/76906890/id/" + index + ".json";
+            var url = "https://api.ishuhui.com/cartoon/book/ver/76906890/id/" + index + ".json";
             $.getJSON(url, function (response) {
                     var dat = response;
 
