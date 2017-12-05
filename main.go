@@ -171,7 +171,6 @@ func bookManagement(id string) bool {
 
 func startTask() {
 	fmt.Println("Start Task!")
-	taskHandler()
 	_, err := os.Stat("./config/")
     if os.IsNotExist(err) {
     	_ = os.Mkdir("./config/", os.ModePerm)
