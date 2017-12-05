@@ -317,7 +317,7 @@ func downloadImage(id string, name string, url string) {
 
     defer response.Body.Close()
 
-    if filepath.Ext(name) != ".jpg" && filepath.Ext(name) != ".jpeg"  {
+    if filepath.Ext(name) != ".jpg" && filepath.Ext(name) != ".jpeg" && filepath.Ext(name) != ".png" {
 		new_name := name[0:len(name)-len(filepath.Ext(name))] + ".jpg"
 
 	    file, err := os.Create(new_name)
