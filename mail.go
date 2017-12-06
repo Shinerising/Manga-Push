@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"mime"
 	"gopkg.in/gomail.v2"
 	"log"
 	"os"
@@ -56,12 +57,12 @@ func pushBookM(bookid int, id string, des string) {
 
 	_, err = os.Stat("./books/" + id + ".pdf")
 	if err == nil {
-		sendMail(des, id, bookinfo.LastNumber)
+		sendMail(des, id, bookinfo.LastNumber， bookinfo.BookName)
 	}
 
 }
 
-func sendMail(des string, id string, lastid string) {
+func sendMail(des string, id string, lastid string, bookname string) {
 	fmt.Println("Start Pushing Book!")
 	config := Config{}
 	_, err := os.Stat("./config/config.json")
@@ -76,7 +77,8 @@ func sendMail(des string, id string, lastid string) {
 	m.SetHeader("To", des)
 	m.SetHeader("Subject", "[MangaPush]")
 	m.SetBody("text/html", "Email from Manga Push")
-	m.Attach("./books/" + id + ".pdf", gomail.Rename("[" + lastid + "].pdf"))
+	baseName := mime.QEncoding.Encode("utf-8", filepath.Base(bookname + " 第" + lastid + "话.pdf"))
+	m.Attach("./books/" + id + ".pdf", gomail.Rename(baseName))
 
 	d := gomail.NewDialer(config.MailAddress, config.MailPort, config.MailUser, config.MailPassword)
 	d.SSL = true
