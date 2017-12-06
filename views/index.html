@@ -1272,7 +1272,7 @@
 
             <div id="stage" class="fullrefresh">
                 <div id="stage_library">
-                    <div class="stage_title"><span id="stage_btn1">My Library ⟩</span>
+                    <div class="stage_title"><span id="stage_btn1">My Library &gt;</span>
                     </div>
                     <div class="stage_libcover canpress scard" index=1>
                         <img class="stage_cover" src="/static/images/book.svg">
@@ -1315,7 +1315,7 @@
                     </div>
                 </div>
                 <div id="stage_list">
-                    <div class="stage_title"><span id="stage_btn2">Read List ⟩</span>
+                    <div class="stage_title"><span id="stage_btn2">Read List &gt;</span>
                     </div>
                 </div>
                 <div id="stage_new">
@@ -1958,9 +1958,9 @@
 
                         url = "api.php?email=" + email + "&para1=" + data[index - 1].fromURL + "&para2=" + data[index - 1].para1 + "&para3=" + data[index - 1].para2 + "&title=" + data[index - 1].name + " " + data[index - 1].lastepi + "&author=" + data[index - 1].author;
 
-                        $.getJSON(url, function (response) {
+                        $.get(url, function (response) {
                                 var dat = response;
-                                if (dat.status == 'succeed') {
+                                if (dat == 'succeed') {
                                     $('#fpanel_submit').text("推送成功！！");
                                     $('.card .card_check').eq(index - 1).show();
 
@@ -2212,7 +2212,7 @@
         }
 
         function updateIndex() {
-            $.getJSON('https://api.ishuhui.com/cartoon/category_latest/ver/07218148/category/1.json', function (response) {
+            $.getJSON('http://api.ishuhui.com/cartoon/category_latest/ver/07218148/category/1.json', function (response) {
                     var dat = response;
                     var list = [];
                     $('.stage_libcover').map(function(idx, item) {
