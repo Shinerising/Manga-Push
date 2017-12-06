@@ -56,7 +56,7 @@ func pushBookM(bookid int, id string, des string) {
 
 	_, err = os.Stat("./books/" + id + ".pdf")
 	if err == nil {
-		sendMail(des, id, bookinfo.LastID)
+		sendMail(des, id, bookinfo.LastNumber)
 	}
 
 }
@@ -76,7 +76,7 @@ func sendMail(des string, id string, lastid string) {
 	m.SetHeader("To", des)
 	m.SetHeader("Subject", "[MangaPush]")
 	m.SetBody("text/html", "Email from Manga Push")
-	m.Attach("./books/" + id + ".pdf", gomail.Rename("第" + lastid + "话.pdf"))
+	m.Attach("./books/" + id + ".pdf", gomail.Rename("[" + lastid + "].pdf"))
 
 	d := gomail.NewDialer(config.MailAddress, config.MailPort, config.MailUser, config.MailPassword)
 	d.SSL = true
