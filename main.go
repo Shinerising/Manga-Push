@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	//startTask()
+	startTask()
 	taskHandler()
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))

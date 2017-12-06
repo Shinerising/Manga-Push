@@ -48,7 +48,7 @@ func pushBook(bookid int, id string) {
 func pushBookM(bookid int, id string, des string) {
 
 	bookinfo := BookInfo{}
-	_, err = os.Stat("./bookinfo/" + strconv.Itoa(bookid) + ".json")
+	_, err := os.Stat("./bookinfo/" + strconv.Itoa(bookid) + ".json")
 	if err != nil {
 		return
 	}
