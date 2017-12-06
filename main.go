@@ -16,6 +16,7 @@ import (
 	"path/filepath"
 	"html/template"
 	"encoding/json"
+	"gopkg.in/gomail.v2"
 	"github.com/jung-kurt/gofpdf"
 )
 
@@ -47,7 +48,7 @@ type Config struct {
 func getJson(path string, target interface{}) error {
     file, err := ioutil.ReadFile(path)
     if err != nil {
-        log.Print(err)
+        log.Panic(err)
     }
 
     return json.Unmarshal(file, target)
@@ -56,12 +57,12 @@ func getJson(path string, target interface{}) error {
 func pageHandler(w http.ResponseWriter, r *http.Request) {
     t, err := template.ParseFiles("./views/index.html")
     if err != nil {
-        log.Print(err)
+        log.Panic(err)
         return
     }
     err = t.Execute(w, nil)
     if err != nil {
-        log.Print(err)
+        log.Panic(err)
         return
     }
 }
@@ -113,18 +114,18 @@ func fetchHandler(w http.ResponseWriter, r *http.Request) {
     if os.IsNotExist(err) {
 	    response, err := http.Get(url)
 	    if err != nil {
-	        log.Print(err)
+	        log.Panic(err)
 	    }
 
 	    defer response.Body.Close()
 
 	    file, err := os.Create(name)
 	    if err != nil {
-	        log.Print(err)
+	        log.Panic(err)
 	    }
 	    _, err = io.Copy(file, response.Body)
 	    if err != nil {
-	        log.Print(err)
+	        log.Panic(err)
 	    }
 	    file.Close()
     }
@@ -140,7 +141,6 @@ func bookManagement(id string) bool {
 
 	book, err := downloadBook(id)
     if err != nil {
-        log.Print(err)
         if err.Error() == "Not Found" {
     		return false
     	} else {
@@ -164,7 +164,7 @@ func bookManagement(id string) bool {
 	jsonString, _ := json.Marshal(bookinfo)
     err = ioutil.WriteFile("./bookinfo/" + strconv.Itoa(bookid) + ".json", jsonString, 0644)
     if err != nil {
-        log.Print(err)
+        log.Panic(err)
     }
     return true
 }
@@ -214,7 +214,7 @@ func taskHandler () {
 	jsonString, _ := json.Marshal(config)
     err = ioutil.WriteFile("./config/config.json", jsonString, 0644)
     if err != nil {
-        log.Print(err)
+        log.Panic(err)
         return
     }
 }
@@ -255,7 +255,7 @@ func downloadBook(id string) (Book, error) {
 
 	    err := json.Unmarshal([]byte(book.NewData.ContentImg), &objmap)
 	    if err != nil {
-			log.Print(err)
+			log.Panic(err)
 			return book, errors.New("Invalid JSON")
 		}
 	    for k := range objmap {
@@ -271,7 +271,7 @@ func downloadBook(id string) (Book, error) {
 
     	files, err := ioutil.ReadDir("./books/" + id)
 	    if err != nil {
-	        log.Print(err)
+	        log.Panic(err)
 			return book, errors.New("Folder Error")
 	    }
 
@@ -298,7 +298,7 @@ func downloadBook(id string) (Book, error) {
 
 		err = pdf.OutputFileAndClose("./books/" + id + ".pdf")
 		if err != nil {
-	        log.Print(err)
+	        log.Panic(err)
 			return book, errors.New("PDF Error")
 	    }
     }
@@ -312,7 +312,7 @@ func downloadImage(id string, name string, url string) {
 
     response, err := http.Get(url)
     if err != nil {
-        log.Print(err)
+        log.Panic(err)
     }
 
     defer response.Body.Close()
@@ -322,22 +322,22 @@ func downloadImage(id string, name string, url string) {
 
 	    file, err := os.Create(new_name)
 	    if err != nil {
-	        log.Print(err)
+	        log.Panic(err)
 	    }
 	    img, _, err := image.Decode(response.Body)
 		if err != nil {
-	        log.Print(err)
+	        log.Panic(err)
 		}
 		jpeg.Encode(file, img, &jpeg.Options{ 100 })
     	file.Close()
 	} else {
 	    file, err := os.Create(name)
 	    if err != nil {
-	        log.Print(err)
+	        log.Panic(err)
 	    }
 		_, err = io.Copy(file, response.Body)
 		if err != nil {
-		    log.Print(err)
+		    log.Panic(err)
 		}
     	file.Close()
 	}
@@ -346,24 +346,41 @@ func downloadImage(id string, name string, url string) {
 func downloadJson(url string, path string) {
 	response, err := http.Get(url)
     if err != nil {
-        log.Print(err)
+        log.Panic(err)
     }
 
     defer response.Body.Close()
 
     file, err := os.Create(path)
     if err != nil {
-        log.Print(err)
+        log.Panic(err)
     }
     _, err = io.Copy(file, response.Body)
     if err != nil {
-        log.Print(err)
+        log.Panic(err)
     }
     file.Close()
 }
 
+func sendMail(des string) {
+	m := gomail.NewMessage()
+	m.SetHeader("From", "mangapush@yahoo.com")
+	m.SetHeader("To", des)
+	m.SetHeader("Subject", "[MangaPush]")
+	m.SetBody("text/html", "Email from Manga Push")
+	m.Attach("./books/10210.pdf")
+
+	d := gomail.NewDialer("smtp.mail.yahoo.com", 465, "mangapush", "weiyang1991")
+	d.SSL = true
+
+	if err := d.DialAndSend(m); err != nil {
+	    log.Panic(err)
+	}
+}
+
 func main() {
 	startTask()
+	sendMail("waynezhaoyang@gmail.com")
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
     http.HandleFunc("/", pageHandler)
