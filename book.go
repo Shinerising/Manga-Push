@@ -118,6 +118,9 @@ func downloadBook(id string) (Book, error) {
 		} else {
 			getJson("./bookinfo/"+strconv.Itoa(bookid)+".json", &bookinfo)
 		}
+		if bookinfo.Author == "" {
+			bookinfo.Author = "未知作者"
+		}
 
 		pdf := gofpdf.New("P", "mm", "A5", "")
 		pdf.SetTitle("第"+strconv.Itoa(book.NewData.Number)+"话 "+book.NewData.Title, true)

@@ -80,13 +80,7 @@ func sendMail(des string, id string, lastid string, bookname string) bool {
 	m.SetBody("text/html", "Email from Manga Push")
 	fileName := mime.QEncoding.Encode("utf-8", bookname+" 第"+lastid+"话.pdf")
 	attachFileName := "./books/" + id + ".pdf"
-	mediaType := mime.TypeByExtension(".pdf")
-	if mediaType == "" {
-		mediaType = "application/octet-stream"
-	}
-	m.Attach(attachFileName, gomail.SetHeader(map[string][]string{
-		"Content-Type": {mediaType + `; charset=utf-8; name="` + fileName + `"`},
-	}))
+	m.Attach(attachFileName, gomail.Rename(fileName))
 
 	d := gomail.NewDialer(config.MailAddress, config.MailPort, config.MailUser, config.MailPassword)
 	d.SSL = true
