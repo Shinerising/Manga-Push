@@ -1956,7 +1956,7 @@
                         $("#head_icon").show();
                         pushing = 'pushing';
 
-                        url = "api.php?email=" + email + "&para1=" + data[index - 1].fromURL + "&para2=" + data[index - 1].para1 + "&para3=" + data[index - 1].para2 + "&title=" + data[index - 1].name + " " + data[index - 1].lastepi + "&author=" + data[index - 1].author;
+                        url = "push?id=" + (index - 1) + "&mail=" + email;
 
                         $.get(url, function (response) {
                                 var dat = response;
@@ -2212,7 +2212,7 @@
         }
 
         function updateIndex() {
-            $.getJSON('http://api.ishuhui.com/cartoon/category_latest/ver/07218148/category/1.json', function (response) {
+            $.getJSON('http://hhzapi.ishuhui.com/cartoon/category_latest/ver/07218148/category/1.json', function (response) {
                     var dat = response;
                     var list = [];
                     $('.stage_libcover').map(function(idx, item) {
@@ -2233,7 +2233,7 @@
         }
 
         function updateDetail(index, succeed, fail) {
-            var url = "https://api.ishuhui.com/cartoon/book/ver/76906890/id/" + index + ".json";
+            var url = "http://hhzapi.ishuhui.com/cartoon/book/ver/76906890/id/" + index + ".json";
             $.getJSON(url, function (response) {
                     var dat = response;
 

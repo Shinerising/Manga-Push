@@ -29,6 +29,16 @@ func downloadHandler(w http.ResponseWriter, r *http.Request) {
 	bookManagement(id)
 }
 
+func pushHandler(w http.ResponseWriter, r *http.Request) {
+	id := r.URL.Query().Get("id")
+	mail := r.URL.Query().Get("mail")
+	if pushBookM(id, mail) {
+		fmt.Fprintf(w, "succeed")
+	} else {
+		fmt.Fprintf(w, "fail")
+	}
+}
+
 func fileHandler(w http.ResponseWriter, r *http.Request) {
 	id := r.URL.Query().Get("id")
 	_, err := os.Stat("./books/" + id + ".pdf")

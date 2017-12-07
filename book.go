@@ -109,7 +109,6 @@ func downloadBook(id string) (Book, error) {
 			return book, errors.New("Folder Error")
 		}
 
-		
 		bookid := book.NewData.Book
 		bookinfo := BookInfo{}
 		_, err = os.Stat("./bookinfo/" + strconv.Itoa(bookid) + ".json")

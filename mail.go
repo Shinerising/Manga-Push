@@ -2,9 +2,8 @@ package main
 
 import (
 	"fmt"
-	"mime"
 	"gopkg.in/gomail.v2"
-	"log"
+	"mime"
 	"os"
 	"strconv"
 )
@@ -41,33 +40,35 @@ func pushBook(bookid int, id string) {
 
 	_, err = os.Stat("./books/" + id + ".pdf")
 	if err == nil {
-		sendMail(sub.Mail, id, bookinfo.LastID)
+		sendMail(sub.Mail, id, bookinfo.LastNumber, bookinfo.BookName)
 	}
 
 }
 
-func pushBookM(bookid int, id string, des string) {
+func pushBookM(bookid string, des string) bool {
 
 	bookinfo := BookInfo{}
-	_, err := os.Stat("./bookinfo/" + strconv.Itoa(bookid) + ".json")
+	_, err := os.Stat("./bookinfo/" + bookid + ".json")
 	if err != nil {
-		return
+		return false
 	}
-	getJson("./bookinfo/"+strconv.Itoa(bookid)+".json", &bookinfo)
+	getJson("./bookinfo/" + bookid + ".json", &bookinfo)
+	id := bookinfo.LastID
 
 	_, err = os.Stat("./books/" + id + ".pdf")
 	if err == nil {
-		sendMail(des, id, bookinfo.LastNumber， bookinfo.BookName)
+		b := sendMail(des, id, bookinfo.LastNumber, bookinfo.BookName)
+		return b
 	}
-
+	return false
 }
 
-func sendMail(des string, id string, lastid string, bookname string) {
+func sendMail(des string, id string, lastid string, bookname string) bool {
 	fmt.Println("Start Pushing Book!")
 	config := Config{}
 	_, err := os.Stat("./config/config.json")
 	if err != nil {
-		return
+		return false
 	}
 
 	getJson("./config/config.json", &config)
@@ -77,14 +78,23 @@ func sendMail(des string, id string, lastid string, bookname string) {
 	m.SetHeader("To", des)
 	m.SetHeader("Subject", "[MangaPush]")
 	m.SetBody("text/html", "Email from Manga Push")
-	baseName := mime.QEncoding.Encode("utf-8", filepath.Base(bookname + " 第" + lastid + "话.pdf"))
-	m.Attach("./books/" + id + ".pdf", gomail.Rename(baseName))
+	fileName := mime.QEncoding.Encode("utf-8", bookname+" 第"+lastid+"话.pdf")
+	attachFileName := "./books/" + id + ".pdf"
+	mediaType := mime.TypeByExtension(".pdf")
+	if mediaType == "" {
+		mediaType = "application/octet-stream"
+	}
+	m.Attach(attachFileName, gomail.SetHeader(map[string][]string{
+		"Content-Type": {mediaType + `; charset=utf-8; name="` + fileName + `"`},
+	}))
 
 	d := gomail.NewDialer(config.MailAddress, config.MailPort, config.MailUser, config.MailPassword)
 	d.SSL = true
 
 	if err := d.DialAndSend(m); err != nil {
-		log.Panic(err)
+		fmt.Println("Mail Sending Fail!")
+		return false
 	}
 	fmt.Println("Mail Sending Succeed!")
+	return true
 }
